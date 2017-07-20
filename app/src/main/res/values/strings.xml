@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Freedom Clock</string>
+    <string name="date_of_seperation">date of seperation:</string>
+    <string name="days_until_seperation">days until seperation:</string>
+</resources>
