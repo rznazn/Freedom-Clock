@@ -7,4 +7,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="set_ets_date">set_ets_date</string>
     <string name="confirm">confirm</string>
+    <string name="year_pref">yearPref</string>
+    <string name="month_pref">monthPref</string>
+    <string name="day_pref">dayPref</string>
 </resources>
