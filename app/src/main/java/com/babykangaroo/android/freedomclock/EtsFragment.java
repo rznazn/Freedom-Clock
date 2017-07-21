@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +18,14 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.joda.time.LocalDate;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class EtsFragment extends Fragment {
 
     private TextView tvEtsDateView;
     private TextView tvDaysTillSeperation;
-    private LocalDate etsDate;
+    private long etsDate;
     private ImageView setETSdate;
     private Context parentContext;
     private SharedPreferences sharedPreferences;
@@ -52,11 +54,18 @@ public class EtsFragment extends Fragment {
                         int year = datePicker.getYear();
                         int month = datePicker.getMonth();
                         int day = datePicker.getDayOfMonth();
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(Calendar.DAY_OF_MONTH, day);
+                        cal.set(Calendar.MONTH, month);
+                        cal.set(Calendar.YEAR, year);
+                        cal.set(Calendar.HOUR_OF_DAY,0);
+                        cal.set(Calendar.MINUTE, 0);
+                        cal.set(Calendar.SECOND,0);
+                        cal.set(Calendar.MILLISECOND,0);
+                        etsDate = cal.getTimeInMillis();
                         spEditor = sharedPreferences.edit();
-                        spEditor.putInt(getString(R.string.year_pref), year);
-                        spEditor.putInt(getString(R.string.month_pref), month);
-                        spEditor.putInt(getString(R.string.day_pref), day);
-                        etsDate = new LocalDate(year,month,day);
+                        spEditor.putLong(getString(R.string.ets_date), etsDate);
+
                         spEditor.apply();
                         setViews();
                     }
@@ -66,9 +75,7 @@ public class EtsFragment extends Fragment {
                 ad.show();
             }
         });sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        if (sharedPreferences.contains(getString(R.string.year_pref))
-                && sharedPreferences.contains(getString(R.string.month_pref))
-                && sharedPreferences.contains(getString(R.string.day_pref))){
+        if (sharedPreferences.contains(getString(R.string.ets_date))){
             setViews();
 
         }
@@ -76,10 +83,11 @@ public class EtsFragment extends Fragment {
     }
 
     private void setViews(){
-        etsDate = new LocalDate(sharedPreferences.getInt(getString(R.string.year_pref), 1970),
-            sharedPreferences.getInt(getString(R.string.month_pref), 1),
-            sharedPreferences.getInt(getString(R.string.day_pref), 1));
-        tvEtsDateView.setText(etsDate.toString());
+        etsDate = sharedPreferences.getLong(getString(R.string.ets_date), 0);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd");
+        String dateToDisplay = dateFormat.format(etsDate);
+        tvEtsDateView.setText(dateToDisplay);
+        tvEtsDateView.setTextSize(40);
 
 
     }

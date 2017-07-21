@@ -10,4 +10,6 @@
     <string name="year_pref">yearPref</string>
     <string name="month_pref">monthPref</string>
     <string name="day_pref">dayPref</string>
+    <string name="ets_date">etsDate</string>
+    <string name="set_ets">Click the settings gear to set date of separation</string>
 </resources>

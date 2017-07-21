@@ -32,9 +32,9 @@
             android:layout_margin="12dp"
             android:fontFamily="serif"
             android:gravity="center"
-            android:text="2017-04-22"
+            android:text="@string/set_ets"
             android:textColor="@android:color/black"
-            android:textSize="40sp" />
+            android:textSize="16sp" />
 
         <TextView
             style="@style/HeaderTextView"
