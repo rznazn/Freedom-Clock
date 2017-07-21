@@ -88,7 +88,8 @@ public class EtsFragment extends Fragment {
         String dateToDisplay = dateFormat.format(etsDate);
         tvEtsDateView.setText(dateToDisplay);
         tvEtsDateView.setTextSize(40);
-
-
+        long timeUntil = (etsDate + (1000*60*60*24)) - System.currentTimeMillis();
+        long daysUntil = timeUntil/(1000*60*60*24);
+        tvDaysTillSeperation.setText(String.valueOf(daysUntil));
     }
 }
