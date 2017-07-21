@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
@@ -30,6 +31,7 @@ public class EtsFragment extends Fragment {
     private Context parentContext;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor spEditor;
+    private CountDownTimer countDownTimer;
 
     @Nullable
     @Override
@@ -83,13 +85,32 @@ public class EtsFragment extends Fragment {
     }
 
     private void setViews(){
+        if (countDownTimer != null){
+            countDownTimer.cancel();
+            countDownTimer = null;
+        }
         etsDate = sharedPreferences.getLong(getString(R.string.ets_date), 0);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd");
         String dateToDisplay = dateFormat.format(etsDate);
         tvEtsDateView.setText(dateToDisplay);
         tvEtsDateView.setTextSize(40);
-        long timeUntil = (etsDate + (1000*60*60*24)) - System.currentTimeMillis();
-        long daysUntil = timeUntil/(1000*60*60*24);
-        tvDaysTillSeperation.setText(String.valueOf(daysUntil));
+        countDownTimer = new CountDownTimer((etsDate + (1000*60*60*24)) - System.currentTimeMillis(), 1000) {
+            @Override
+            public void onTick(long l) {
+//                long daysUntil = timeUntil/(1000*60*60*24);
+                long seconds = l / 1000;
+                long minutes = seconds / 60;
+                long hours = minutes / 60;
+                long days = hours / 24;
+                String time = days + ":" + hours % 24 + ":" + minutes % 60 + ":" + seconds % 60;
+                tvDaysTillSeperation.setText(String.valueOf(time));
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+        countDownTimer.start();
     }
 }
