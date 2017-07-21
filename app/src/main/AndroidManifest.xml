@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".EtsFragment" />
-        <activity android:name=".deadline_fragment"></activity>
+        <activity android:name=".DeadlineFragment"></activity>
     </application>
 
 </manifest>

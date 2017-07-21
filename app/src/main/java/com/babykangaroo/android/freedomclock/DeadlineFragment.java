@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class EtsFragment extends Fragment {
-
+public class DeadlineFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.ets_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.deadline_fragment, container, false);
         return rootView;
     }
 }

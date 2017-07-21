@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Freedom Clock</string>
-    <string name="date_of_seperation">date of seperation:</string>
-    <string name="days_until_seperation">days until seperation:</string>
+    <string name="date_of_separation">date of separation:</string>
+    <string name="days_until_separation">days until separation:</string>
 </resources>

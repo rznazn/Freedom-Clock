@@ -5,27 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.babykangaroo.android.freedomclock.deadline_fragment">
+    tools:context="com.babykangaroo.android.freedomclock.DeadlineFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:gravity="center_horizontal"
+        style="@style/HeaderTextView"
         android:text="upcoming"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/black"/>
-    <android.support.v7.widget.RecyclerView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_upcoming"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         />
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_deadline"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_margin="12dp"
-        android:layout_gravity="bottom|right"/>
+        android:layout_gravity="bottom|end"/>
+    </FrameLayout>
 </LinearLayout>
