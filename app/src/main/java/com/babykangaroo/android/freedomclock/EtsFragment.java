@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -72,7 +73,7 @@ public class EtsFragment extends Fragment {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(Intent.EXTRA_STREAM, bmpUri);
                 intent.setType("image/png");
-                startActivity(intent);
+                startActivityForResult(intent, 9997);
             }
         });
         if (sharedPreferences.contains(getString(R.string.ets_date))){
@@ -156,9 +157,13 @@ public class EtsFragment extends Fragment {
         countDownTimer.start();
     }
     protected Bitmap ConvertToBitmap(View layout) {
-        Bitmap map;
+        Bitmap map = Bitmap.createBitmap(layout.getMeasuredWidth(),
+                layout.getMeasuredHeight(),
+                Bitmap.Config.ARGB_8888);
         layout.setDrawingCacheEnabled(true);
         layout.buildDrawingCache();
-        return map=layout.getDrawingCache();
+        Canvas canvas = new Canvas(map);
+        layout.draw(canvas);
+        return map;
     }
 }
