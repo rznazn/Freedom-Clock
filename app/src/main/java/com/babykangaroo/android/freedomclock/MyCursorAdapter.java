@@ -17,16 +17,24 @@ import java.text.SimpleDateFormat;
  * Created by Gene Denney on 7/22/2017.
  */
 
-public class MyCursorAdapter extends RecyclerView.Adapter<MyCursorAdapter.DeadlineViewHolder> implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class MyCursorAdapter extends RecyclerView.Adapter<MyCursorAdapter.DeadlineViewHolder>
+        implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private Cursor mCursor;
     private Context mContext;
     private SharedPreferences sharedPreferences;
+    private ItemClickListener clickListener;
 
-    public MyCursorAdapter(Context context) {
+    public MyCursorAdapter(Context context, ItemClickListener listener) {
         mContext = context;
+        clickListener = listener;
         sharedPreferences = MainActivity.mainSharedPreferences;
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+
+    public interface ItemClickListener {
+        void onClick(long clickedItemId);
     }
 
     @Override
@@ -36,7 +44,7 @@ public class MyCursorAdapter extends RecyclerView.Adapter<MyCursorAdapter.Deadli
     }
 
     @Override
-    public void onBindViewHolder(DeadlineViewHolder holder, int position) {
+    public void onBindViewHolder(DeadlineViewHolder holder, int position){
             long etsDate = sharedPreferences.getLong(mContext.getString(R.string.ets_date), 0);
             mCursor.moveToPosition(position);
             String event = mCursor.getString(
@@ -71,14 +79,23 @@ public class MyCursorAdapter extends RecyclerView.Adapter<MyCursorAdapter.Deadli
         }
     }
 
-    class DeadlineViewHolder extends RecyclerView.ViewHolder {
+    class DeadlineViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView nameView;
         TextView dateView;
 
         DeadlineViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             nameView = (TextView) itemView.findViewById(R.id.tv_list_item_name);
             dateView = (TextView) itemView.findViewById(R.id.tv_list_item_date);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            mCursor.moveToPosition(position);
+            long id = mCursor.getLong(mCursor.getColumnIndex(ListContract.ListContractEntry._ID));
+            clickListener.onClick(id);
         }
     }
 }
