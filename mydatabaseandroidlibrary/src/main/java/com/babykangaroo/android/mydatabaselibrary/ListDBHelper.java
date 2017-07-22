@@ -12,7 +12,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
 
 
     public static final String LOG_TAG = ListDBHelper.class.getName();
-    private static final String DATABASE_NAME =  "directory.db";
+    private static final String DATABASE_NAME =  "items.db";
     private static final int DATABASE_VERSION = 1;
 
     /** public constructor for new instance of the PetDbHelper*/
@@ -24,17 +24,11 @@ public class ListDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String SQL_CREATE_NEW_DIRECTORY_TABLE = "CREATE TABLE " + ListContract.ListContractEntry.DIRECTORY_TABLE_NAME +" ("
-                + ListContract.ListContractEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ListContract.ListContractEntry.COLUMN_ITEM_NAME + " TEXT UNIQUE NOT NULL);";
-
         String SQL_CREATE_NEW_ITEMS_TABLE = "CREATE TABLE " + ListContract.ListContractEntry.ITEMS_TABLE_NAME +" ("
                 + ListContract.ListContractEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + ListContract.ListContractEntry.COLUMN_ITEM_NAME + " TEXT NOT NULL, "
-                + ListContract.ListContractEntry.COLUMN_ITEM_PARENT_LIST + " TEXT NOT NULL, "
-                + ListContract.ListContractEntry.COLUMN_ITEM_NOTE + " TEXT);";
+                + ListContract.ListContractEntry.COLUMN_ITEM_DATE + " INTEGER);";
 
-        db.execSQL(SQL_CREATE_NEW_DIRECTORY_TABLE);
         db.execSQL(SQL_CREATE_NEW_ITEMS_TABLE);
 
     }

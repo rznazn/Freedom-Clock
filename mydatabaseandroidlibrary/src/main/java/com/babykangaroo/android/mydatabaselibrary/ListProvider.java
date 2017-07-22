@@ -28,8 +28,6 @@ public class ListProvider extends ContentProvider {
      * UriMatcher to match to directory list, items list, table, or item
      * @return
      */
-    public static final int DIRECTORY = 100;
-    public static final int DIRECTORY_WITH_ID = 101;
     public static final int ITEMS = 200;
     public static final int ITEMS_WITH_ID = 201;
 
@@ -38,8 +36,6 @@ public class ListProvider extends ContentProvider {
     private static UriMatcher buildUriMatcher() {
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
-        uriMatcher.addURI(ListContract.CONTENT_AUTHORITY, ListContract.DIRECTORY_PATH_NAME, DIRECTORY);
-        uriMatcher.addURI(ListContract.CONTENT_AUTHORITY, ListContract.DIRECTORY_PATH_NAME + "#", DIRECTORY_WITH_ID);
 
         uriMatcher.addURI(ListContract.CONTENT_AUTHORITY, ListContract.ITEMS_PATH_NAME, ITEMS);
         uriMatcher.addURI(ListContract.CONTENT_AUTHORITY, ListContract.ITEMS_PATH_NAME + "#", ITEMS_WITH_ID);
@@ -63,19 +59,8 @@ public class ListProvider extends ContentProvider {
                         @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         SQLiteDatabase db = mDBHelper.getWritableDatabase();
         int match = mUriMatcher.match(uri);
-        Cursor cursor = null;
+        Cursor cursor;
         switch (match) {
-            case DIRECTORY:
-             cursor = db.query(ListContract.ListContractEntry.DIRECTORY_TABLE_NAME,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null);
-            cursor.setNotificationUri(getContext().getContentResolver(),
-                    ListContract.ListContractEntry.DIRECTORY_CONTENT_URI);
-            break;
             case ITEMS:
                 cursor = db.query(ListContract.ListContractEntry.ITEMS_TABLE_NAME,
                         null,
@@ -110,15 +95,6 @@ public class ListProvider extends ContentProvider {
         Uri returnUri = null;
         long id;
         switch (match) {
-            case DIRECTORY:
-                id = db.insert(ListContract.ListContractEntry.DIRECTORY_TABLE_NAME, null, values);
-                if ( id > 0 ) {
-                    returnUri = ContentUris.withAppendedId(ListContract.ListContractEntry.DIRECTORY_CONTENT_URI, id);
-                } else {
-                    /** show toast to alert user to duplicate entries in the title table */
-                    Toast.makeText(getContext(), getContext().getString(R.string.already_exists), Toast.LENGTH_SHORT).show();
-                }
-                break;
             case ITEMS:
                 id = db.insert(ListContract.ListContractEntry.ITEMS_TABLE_NAME,null, values);
                 if (id > 0){
@@ -141,12 +117,6 @@ public class ListProvider extends ContentProvider {
         int match = mUriMatcher.match(uri);
         int rowsDeleted = -1;
         switch (match) {
-            case DIRECTORY:
-                rowsDeleted = db.delete(ListContract.ListContractEntry.DIRECTORY_TABLE_NAME,
-                        selection,
-                        selectionArgs);
-                getContext().getContentResolver().notifyChange(uri, null);
-                break;
             case ITEMS:
                 rowsDeleted = db.delete(ListContract.ListContractEntry.ITEMS_TABLE_NAME,
                         selection,
