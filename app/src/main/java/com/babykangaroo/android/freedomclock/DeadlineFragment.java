@@ -17,13 +17,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.babykangaroo.android.mydatabaselibrary.ListContract;
 
 import java.text.SimpleDateFormat;
-import java.util.prefs.PreferenceChangeEvent;
-import java.util.prefs.PreferenceChangeListener;
 
 public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -33,6 +32,7 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
     private MyCursorAdapter myCursorAdapter;
     private RecyclerView recyclerView;
     private SharedPreferences sharedPreferences;
+    private TextView emptyView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +41,8 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
         myCursorAdapter = new MyCursorAdapter(parentContext);
 
         View rootView = inflater.inflate(R.layout.deadline_fragment, container, false);
+
+        emptyView = (TextView) rootView.findViewById(R.id.tv_rv_empty_view);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_upcoming);
         recyclerView.setAdapter(myCursorAdapter);
@@ -77,6 +79,11 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        if (cursor.getCount() < 1) {
+            emptyView.setVisibility(View.VISIBLE);
+        }else{
+            emptyView.setVisibility(View.INVISIBLE);
+        }
         myCursorAdapter.swapCursor(cursor);
     }
 

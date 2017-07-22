@@ -29,5 +29,10 @@
         android:layout_height="56dp"
         android:layout_margin="12dp"
         android:layout_gravity="bottom|end"/>
+        <TextView
+            android:id="@+id/tv_rv_empty_view"
+            style="@style/ContentTextViewEts"
+            android:text="@string/click_fab"
+            />
     </FrameLayout>
 </LinearLayout>
