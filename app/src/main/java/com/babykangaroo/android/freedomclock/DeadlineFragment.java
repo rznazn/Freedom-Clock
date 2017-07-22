@@ -1,10 +1,12 @@
 package com.babykangaroo.android.freedomclock;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -17,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,15 +57,31 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
         fabAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                long daysPrior = 7;
-                long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), System.currentTimeMillis());
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(ListContract.ListContractEntry.COLUMN_ITEM_NAME, "deadline");
-                contentValues.put(ListContract.ListContractEntry.COLUMN_ITEM_DATE, daysPrior);
-                Uri uri = getActivity().getContentResolver().insert(ListContract.ListContractEntry.ITEMS_CONTENT_URI, contentValues);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MMM-dd");
-                String dateOfEvent = simpleDateFormat.format(etsDate - ((1000*60*60*24)*daysPrior));
-                Toast.makeText(parentContext, dateOfEvent, Toast.LENGTH_LONG).show();
+                final View adView = LayoutInflater.from(parentContext).inflate(R.layout.deadline_setter, null);
+                final EditText etTask = (EditText) adView.findViewById(R.id.et_deadline_name);
+                final EditText etDaysPrior = (EditText) adView.findViewById(R.id.et_deadline_days_prior);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(parentContext);
+                builder.setView(adView);
+                builder.setNegativeButton(getString(R.string.cancel), null);
+                builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String task = etTask.getText().toString();
+                        int daysPrior = Integer.valueOf(etDaysPrior.getText().toString());
+                        long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), System.currentTimeMillis());
+                        ContentValues contentValues = new ContentValues();
+                        contentValues.put(ListContract.ListContractEntry.COLUMN_ITEM_NAME, task);
+                        contentValues.put(ListContract.ListContractEntry.COLUMN_ITEM_DATE, daysPrior);
+                        Uri uri = getActivity().getContentResolver().insert(ListContract.ListContractEntry.ITEMS_CONTENT_URI, contentValues);
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MMM-dd");
+                        String dateOfEvent = simpleDateFormat.format(etsDate - ((1000*60*60*24)*daysPrior));
+                        Toast.makeText(parentContext, dateOfEvent, Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
         return rootView;

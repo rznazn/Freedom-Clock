@@ -12,4 +12,6 @@
     <string name="set_ets">Click the settings gear to set date of separation</string>
     <string name="cancel">cancel</string>
     <string name="click_fab">Click the action button below to enter a deadline in days prior to separation</string>
+    <string name="deadine_hint">Enter name of task to do</string>
+    <string name="deadline_days_prior">Enter number of days prior to separation</string>
 </resources>

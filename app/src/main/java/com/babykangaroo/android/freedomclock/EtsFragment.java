@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class EtsFragment extends Fragment {
 
@@ -46,37 +47,8 @@ public class EtsFragment extends Fragment {
         setETSdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final View adView = getActivity().getLayoutInflater().inflate(R.layout.date_picker, null);
-                final DatePicker datePicker = (DatePicker) adView.findViewById(R.id.dp_datePicker);
-                AlertDialog.Builder builder = new AlertDialog.Builder(parentContext);
-                builder.setView(adView);
-                builder.setMessage(R.string.set_ets_date);
-                builder.setNegativeButton(getString(R.string.cancel),null);
-                builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        int year = datePicker.getYear();
-                        int month = datePicker.getMonth();
-                        int day = datePicker.getDayOfMonth();
-                        Calendar cal = Calendar.getInstance();
-                        cal.set(Calendar.DAY_OF_MONTH, day);
-                        cal.set(Calendar.MONTH, month);
-                        cal.set(Calendar.YEAR, year);
-                        cal.set(Calendar.HOUR_OF_DAY,0);
-                        cal.set(Calendar.MINUTE, 0);
-                        cal.set(Calendar.SECOND,0);
-                        cal.set(Calendar.MILLISECOND,0);
-                        etsDate = cal.getTimeInMillis();
-                        spEditor = sharedPreferences.edit();
-                        spEditor.putLong(getString(R.string.ets_date), etsDate);
+                showDatePickerAd();
 
-                        spEditor.apply();
-                        setViews();
-                    }
-                });
-
-                AlertDialog ad = builder.create();
-                ad.show();
             }
         });
         if (sharedPreferences.contains(getString(R.string.ets_date))){
@@ -84,6 +56,48 @@ public class EtsFragment extends Fragment {
 
         }
         return rootView;
+    }
+
+    private void showDatePickerAd() {
+        final View adView = getActivity().getLayoutInflater().inflate(R.layout.date_picker, null);
+        final DatePicker datePicker = (DatePicker) adView.findViewById(R.id.dp_datePicker);
+        if (sharedPreferences.contains(getString(R.string.ets_date))){
+            long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), 0);
+            Date date = new Date(etsDate);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            datePicker.updateDate(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(parentContext);
+        builder.setView(adView);
+        builder.setMessage(R.string.set_ets_date);
+        builder.setNegativeButton(getString(R.string.cancel),null);
+        builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                int year = datePicker.getYear();
+                int month = datePicker.getMonth();
+                int day = datePicker.getDayOfMonth();
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.DAY_OF_MONTH, day);
+                cal.set(Calendar.MONTH, month);
+                cal.set(Calendar.YEAR, year);
+                cal.set(Calendar.HOUR_OF_DAY,0);
+                cal.set(Calendar.MINUTE, 0);
+                cal.set(Calendar.SECOND,0);
+                cal.set(Calendar.MILLISECOND,0);
+                etsDate = cal.getTimeInMillis();
+                spEditor = sharedPreferences.edit();
+                spEditor.putLong(getString(R.string.ets_date), etsDate);
+
+                spEditor.apply();
+                setViews();
+            }
+        });
+
+        AlertDialog ad = builder.create();
+        ad.show();
+
     }
 
     private void setViews(){
