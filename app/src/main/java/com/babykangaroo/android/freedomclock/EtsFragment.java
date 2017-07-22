@@ -54,6 +54,8 @@ public class EtsFragment extends Fragment {
         if (sharedPreferences.contains(getString(R.string.ets_date))){
             setViews();
 
+        } else {
+            showDatePickerAd();
         }
         return rootView;
     }
