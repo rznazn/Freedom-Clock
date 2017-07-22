@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="368dp"
-    android:layout_height="200dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:padding="8dp"
     tools:context="com.babykangaroo.android.freedomclock.EtsFragment"
     tools:layout_editor_absoluteX="8dp"
@@ -13,16 +13,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:alpha=".55"
+        android:alpha=".45"
         android:src="@drawable/u_s__department_of_the_army_da_seal1_5" />
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
+        android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
             style="@style/HeaderTextView"
+            android:textAlignment="center"
             android:text="@string/date_of_separation"/>
 
         <TextView
@@ -38,6 +42,7 @@
 
         <TextView
             style="@style/HeaderTextView"
+            android:textAlignment="center"
             android:text="@string/days_until_separation" />
 
         <TextView
@@ -51,6 +56,7 @@
             android:textColor="@android:color/black"
             android:textSize="40sp" />
     </LinearLayout>
+</ScrollView>
     <ImageView
         android:id="@+id/iv_set_date"
         android:layout_width="wrap_content"

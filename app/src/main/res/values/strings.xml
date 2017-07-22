@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">Freedom Clock</string>
     <string name="date_of_separation">date of separation:</string>
-    <string name="days_until_separation">days until separation:</string>
+    <string name="days_until_separation">days until separation:\ndays:hours:minutes:seconds</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="set_ets_date">set_ets_date</string>
+    <string name="set_ets_date">set ets date</string>
     <string name="confirm">confirm</string>
     <string name="year_pref">yearPref</string>
     <string name="month_pref">monthPref</string>
