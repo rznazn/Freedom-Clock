@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
  * Created by Gene Denney on 7/22/2017.
  */
 
-public class MyCursorAdapter extends RecyclerView.Adapter<MyCursorAdapter.DeadlineViewHolder> {
+public class MyCursorAdapter extends RecyclerView.Adapter<MyCursorAdapter.DeadlineViewHolder> implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private Cursor mCursor;
     private Context mContext;
@@ -26,6 +26,7 @@ public class MyCursorAdapter extends RecyclerView.Adapter<MyCursorAdapter.Deadli
     public MyCursorAdapter(Context context) {
         mContext = context;
         sharedPreferences = MainActivity.mainSharedPreferences;
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
@@ -62,6 +63,13 @@ public class MyCursorAdapter extends RecyclerView.Adapter<MyCursorAdapter.Deadli
             return mCursor.getCount();
         }
         return 0;
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        if (s.equals(mContext.getString(R.string.ets_date))){
+            notifyDataSetChanged();
+        }
     }
 
     class DeadlineViewHolder extends RecyclerView.ViewHolder {

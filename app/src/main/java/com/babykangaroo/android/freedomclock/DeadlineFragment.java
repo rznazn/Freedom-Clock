@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.babykangaroo.android.mydatabaselibrary.ListContract;
 
 import java.text.SimpleDateFormat;
+import java.util.prefs.PreferenceChangeEvent;
+import java.util.prefs.PreferenceChangeListener;
 
 public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
