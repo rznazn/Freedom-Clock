@@ -11,4 +11,5 @@
     <string name="ets_date">etsDate</string>
     <string name="set_ets">Click the settings gear to set date of separation</string>
     <string name="cancel">cancel</string>
+    <string name="click_fab">Click the action button below to enter a deadline in days prior to separation</string>
 </resources>
