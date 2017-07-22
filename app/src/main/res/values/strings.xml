@@ -10,4 +10,5 @@
     <string name="day_pref">dayPref</string>
     <string name="ets_date">etsDate</string>
     <string name="set_ets">Click the settings gear to set date of separation</string>
+    <string name="cancel">cancel</string>
 </resources>

@@ -31,14 +31,8 @@
 
         <TextView
             android:id="@+id/tv_date_of_separation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:fontFamily="serif"
-            android:gravity="center"
-            android:text="@string/set_ets"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            style="@style/ContentTextViewEts"
+            android:text="@string/set_ets" />
 
         <TextView
             style="@style/HeaderTextView"
@@ -47,14 +41,8 @@
 
         <TextView
             android:id="@+id/tv_time_until"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:fontFamily="serif"
-            android:gravity="center"
-            android:text="236"
-            android:textColor="@android:color/black"
-            android:textSize="40sp" />
+            style="@style/ContentTextViewEts"
+            android:text="0:0:0:0" />
     </LinearLayout>
 </ScrollView>
     <ImageView

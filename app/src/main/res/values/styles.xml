@@ -17,4 +17,29 @@
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:fontFamily="serif"
+    android:gravity="center"
+    android:text="236"
+    android:textColor="@android:color/black"
+    android:textSize="40sp"
+    <style name="ContentTextView">
+        <item name="android:layout_margin">12dp</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="ContentTextViewEts" parent="ContentTextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+    <style name="ContentTextViewDeadline" parent="ContentTextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
 </resources>

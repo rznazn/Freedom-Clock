@@ -50,6 +50,7 @@ public class EtsFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(parentContext);
                 builder.setView(adView);
                 builder.setMessage(R.string.set_ets_date);
+                builder.setNegativeButton(getString(R.string.cancel),null);
                 builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
