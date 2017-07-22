@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FreedomClock.iml" filepath="$PROJECT_DIR$/FreedomClock.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mydatabaseandroidlibrary/mydatabaseandroidlibrary.iml" filepath="$PROJECT_DIR$/mydatabaseandroidlibrary/mydatabaseandroidlibrary.iml" />
     </modules>
   </component>
 </project>
