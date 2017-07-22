@@ -2,6 +2,7 @@ package com.babykangaroo.android.freedomclock;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -9,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     public Context mainContext;
+    public static SharedPreferences mainSharedPreferences;
 
 
     @Override
@@ -16,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainContext = this;
-
+        mainSharedPreferences = getPreferences(MODE_PRIVATE);
         fragmentManager = getFragmentManager();
 
         EtsFragment etsFragment = new EtsFragment();

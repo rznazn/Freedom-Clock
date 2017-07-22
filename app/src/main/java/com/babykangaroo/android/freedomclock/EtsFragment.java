@@ -38,6 +38,7 @@ public class EtsFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.ets_fragment, container, false);
         parentContext = getActivity();
+        sharedPreferences = MainActivity.mainSharedPreferences;
 
         tvEtsDateView = (TextView) rootView.findViewById(R.id.tv_date_of_separation);
         tvDaysTillSeperation = (TextView) rootView.findViewById(R.id.tv_time_until);
@@ -77,7 +78,7 @@ public class EtsFragment extends Fragment {
                 AlertDialog ad = builder.create();
                 ad.show();
             }
-        });sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        });
         if (sharedPreferences.contains(getString(R.string.ets_date))){
             setViews();
 

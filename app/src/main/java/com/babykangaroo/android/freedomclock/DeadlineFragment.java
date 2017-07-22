@@ -30,10 +30,12 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
     private Context parentContext;
     private MyCursorAdapter myCursorAdapter;
     private RecyclerView recyclerView;
+    private SharedPreferences sharedPreferences;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         parentContext = getActivity();
+        sharedPreferences = MainActivity.mainSharedPreferences;
         myCursorAdapter = new MyCursorAdapter(parentContext);
 
         View rootView = inflater.inflate(R.layout.deadline_fragment, container, false);
@@ -49,7 +51,6 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
             @Override
             public void onClick(View view) {
                 long daysPrior = 7;
-                SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
                 long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), System.currentTimeMillis());
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(ListContract.ListContractEntry.COLUMN_ITEM_NAME, "deadline");
@@ -57,7 +58,7 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
                 Uri uri = getActivity().getContentResolver().insert(ListContract.ListContractEntry.ITEMS_CONTENT_URI, contentValues);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MMM-dd");
                 String dateOfEvent = simpleDateFormat.format(etsDate - ((1000*60*60*24)*daysPrior));
-                Toast.makeText(parentContext, uri.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(parentContext, dateOfEvent, Toast.LENGTH_LONG).show();
             }
         });
         return rootView;

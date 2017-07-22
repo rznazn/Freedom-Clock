@@ -1,6 +1,7 @@
 package com.babykangaroo.android.freedomclock;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,30 +21,35 @@ public class MyCursorAdapter extends RecyclerView.Adapter<MyCursorAdapter.Deadli
 
     private Cursor mCursor;
     private Context mContext;
+    private SharedPreferences sharedPreferences;
 
-    public MyCursorAdapter(Context context){
+    public MyCursorAdapter(Context context) {
         mContext = context;
+        sharedPreferences = MainActivity.mainSharedPreferences;
     }
+
     @Override
     public DeadlineViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(mContext).inflate(R.layout.deadline_list_item,parent, false);
+        View rootView = LayoutInflater.from(mContext).inflate(R.layout.deadline_list_item, parent, false);
         return new DeadlineViewHolder(rootView);
     }
 
     @Override
     public void onBindViewHolder(DeadlineViewHolder holder, int position) {
-            mCursor.moveToPosition(position);
-            String event = mCursor.getString(
-                    mCursor.getColumnIndex(ListContract.ListContractEntry.COLUMN_ITEM_NAME));
-            holder.nameView.setText(event);
-            long dateLong = mCursor.getLong(mCursor.getColumnIndex(ListContract.ListContractEntry.COLUMN_ITEM_DATE));
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MMM-dd");
-            String date = simpleDateFormat.format(dateLong);
-            holder.dateView.setText(date);
+        long etsDate = sharedPreferences.getLong(mContext.getString(R.string.ets_date), 0);
+        mCursor.moveToPosition(position);
+        String event = mCursor.getString(
+                mCursor.getColumnIndex(ListContract.ListContractEntry.COLUMN_ITEM_NAME));
+        holder.nameView.setText(event);
+        long daysPrior = mCursor.getLong(mCursor.getColumnIndex(ListContract.ListContractEntry.COLUMN_ITEM_DATE));
+        long dateOfevent = etsDate - ((1000*60*60*24)*daysPrior);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MMM-dd");
+        String date = simpleDateFormat.format(dateOfevent);
+        holder.dateView.setText(date);
 
     }
 
-    void swapCursor(Cursor cursor){
+    void swapCursor(Cursor cursor) {
         if (cursor != null) {
             mCursor = cursor;
             notifyDataSetChanged();
@@ -61,7 +67,8 @@ public class MyCursorAdapter extends RecyclerView.Adapter<MyCursorAdapter.Deadli
     class DeadlineViewHolder extends RecyclerView.ViewHolder {
         TextView nameView;
         TextView dateView;
-         DeadlineViewHolder(View itemView) {
+
+        DeadlineViewHolder(View itemView) {
             super(itemView);
             nameView = (TextView) itemView.findViewById(R.id.tv_list_item_name);
             dateView = (TextView) itemView.findViewById(R.id.tv_list_item_date);
