@@ -68,7 +68,7 @@ public class ListProvider extends ContentProvider {
                         selectionArgs,
                         null,
                         null,
-                        null);
+                        sortOrder);
                 cursor.setNotificationUri(getContext().getContentResolver(),
                         ListContract.ListContractEntry.ITEMS_CONTENT_URI);
                 break;

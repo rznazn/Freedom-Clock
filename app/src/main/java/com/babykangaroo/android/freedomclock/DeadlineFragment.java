@@ -70,7 +70,7 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
                 null,
                 null,
                 null,
-                null);
+                ListContract.ListContractEntry.COLUMN_ITEM_DATE + " DESC");
     }
 
     @Override
