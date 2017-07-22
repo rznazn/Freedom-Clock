@@ -1,22 +1,29 @@
 package com.babykangaroo.android.freedomclock;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -29,6 +36,7 @@ public class EtsFragment extends Fragment {
     private TextView tvDaysTillSeperation;
     private long etsDate;
     private ImageView setETSdate;
+    private ImageView shareEts;
     private Context parentContext;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor spEditor;
@@ -37,7 +45,7 @@ public class EtsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.ets_fragment, container, false);
+        final View rootView = inflater.inflate(R.layout.ets_fragment, container, false);
         parentContext = getActivity();
         sharedPreferences = MainActivity.mainSharedPreferences;
 
@@ -49,6 +57,22 @@ public class EtsFragment extends Fragment {
             public void onClick(View view) {
                 showDatePickerAd();
 
+            }
+        });
+
+        shareEts = (ImageView) rootView.findViewById(R.id.iv_share);
+        shareEts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Bitmap bitmap = ConvertToBitmap(rootView);String pathofBmp =
+                        MediaStore.Images.Media.insertImage(parentContext.getContentResolver(), bitmap,"title", null);
+                Uri bmpUri = Uri.parse(pathofBmp);
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(Intent.EXTRA_STREAM, bmpUri);
+                intent.setType("image/png");
+                startActivity(intent);
             }
         });
         if (sharedPreferences.contains(getString(R.string.ets_date))){
@@ -130,5 +154,11 @@ public class EtsFragment extends Fragment {
             }
         };
         countDownTimer.start();
+    }
+    protected Bitmap ConvertToBitmap(View layout) {
+        Bitmap map;
+        layout.setDrawingCacheEnabled(true);
+        layout.buildDrawingCache();
+        return map=layout.getDrawingCache();
     }
 }
