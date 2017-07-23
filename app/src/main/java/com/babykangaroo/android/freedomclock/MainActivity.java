@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainContext = this;
-        mainSharedPreferences = getPreferences(MODE_PRIVATE);
+        mainSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         fragmentManager = getFragmentManager();
 
         ActivityCompat.requestPermissions(this,
