@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 .setService(EtsNotifications.class)
                 .setTag("Notification")
                 .setRecurring(true)
-                .setTrigger(Trigger.executionWindow(60*60*24, (60*60*24)+120))
+                .setTrigger(Trigger.executionWindow(15, 30))
                 .setReplaceCurrent(true)
                 .build();
         dispatcher.mustSchedule(notification);

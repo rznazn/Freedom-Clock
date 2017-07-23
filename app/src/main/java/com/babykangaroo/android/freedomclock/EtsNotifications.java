@@ -6,10 +6,14 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 
+import br.com.goncalves.pugnotification.interfaces.ImageLoader;
+import br.com.goncalves.pugnotification.interfaces.OnImageLoadingCompleted;
 import br.com.goncalves.pugnotification.notification.PugNotification;
 
 /**
@@ -32,6 +36,19 @@ public class EtsNotifications extends com.firebase.jobdispatcher.JobService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
+        ImageLoader imageLoader = new ImageLoader() {
+            @Override
+            public void load(String uri, OnImageLoadingCompleted onCompleted) {
+
+            }
+
+            @Override
+            public void load(int imageResId, OnImageLoadingCompleted onCompleted) {
+                Bitmap map = BitmapFactory.decodeResource(getResources(), R.drawable.u_s__department_of_the_army_da_seal1_5);
+                onCompleted.imageLoadingCompleted(map);
+            }
+        };
+
         PugNotification.with(getApplicationContext())
                 .load()
                 .title(getString(R.string.app_name))
@@ -40,7 +57,9 @@ public class EtsNotifications extends com.firebase.jobdispatcher.JobService {
                 .largeIcon(R.drawable.pugnotification_ic_launcher)
                 .flags(Notification.DEFAULT_ALL)
                 .click(pendingIntent)
-                .simple()
+                .custom()
+                .background(R.drawable.u_s__department_of_the_army_da_seal1_5)
+                .setImageLoader(imageLoader)
                 .build();
         return false;
     }
