@@ -32,10 +32,6 @@ public class EtsNotifications extends com.firebase.jobdispatcher.JobService {
         long daysLeft = timeTillSep/(1000*60*60*24);
         int daysLeftInt= ((int) daysLeft) +1;
 
-        Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
         ImageLoader imageLoader = new ImageLoader() {
             @Override
             public void load(String uri, OnImageLoadingCompleted onCompleted) {
@@ -56,7 +52,8 @@ public class EtsNotifications extends com.firebase.jobdispatcher.JobService {
                 .smallIcon(R.drawable.pugnotification_ic_launcher)
                 .largeIcon(R.drawable.pugnotification_ic_launcher)
                 .flags(Notification.DEFAULT_ALL)
-                .click(pendingIntent)
+                .click(MainActivity.class)
+                .autoCancel(true)
                 .custom()
                 .background(R.drawable.u_s__department_of_the_army_da_seal1_5)
                 .setImageLoader(imageLoader)
