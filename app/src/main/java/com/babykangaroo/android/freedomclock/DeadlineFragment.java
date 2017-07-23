@@ -137,9 +137,6 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
                     }else {
                         Uri uri = getActivity().getContentResolver().insert(ListContract.ListContractEntry.ITEMS_CONTENT_URI, contentValues);
                     }
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MMM-dd");
-                    String dateOfEvent = simpleDateFormat.format(etsDate - ((1000 * 60 * 60 * 24) * daysPrior));
-                    Toast.makeText(parentContext, dateOfEvent, Toast.LENGTH_LONG).show();
                 }
             });
 
