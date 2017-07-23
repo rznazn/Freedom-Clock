@@ -10,6 +10,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
+import com.firebase.jobdispatcher.Job;
+import com.firebase.jobdispatcher.Trigger;
+
 public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
@@ -36,5 +41,15 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fl_fragment_container2, deadlineFragment, "deadlineFragment")
                 .commit();
 
+
+        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
+
+        Job notificationJob = dispatcher.newJobBuilder()
+                .setService(EtsNotifications.class)
+                .setTag("notification")
+                .setTrigger(Trigger.executionWindow(20, 30))
+                .setReplaceCurrent(true)
+                .build();
+        dispatcher.mustSchedule(notificationJob);
     }
 }
