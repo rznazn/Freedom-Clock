@@ -73,7 +73,7 @@ public class EtsFragment extends Fragment {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(Intent.EXTRA_STREAM, bmpUri);
                 intent.setType("image/png");
-                startActivityForResult(intent, 9997);
+                startActivity(intent);
             }
         });
         if (sharedPreferences.contains(getString(R.string.ets_date))){
