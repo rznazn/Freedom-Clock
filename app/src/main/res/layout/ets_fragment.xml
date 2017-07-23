@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:alpha=".45"
+        android:alpha=".35"
         android:src="@drawable/u_s__department_of_the_army_da_seal1_5" />
 <ScrollView
     android:layout_width="match_parent"
