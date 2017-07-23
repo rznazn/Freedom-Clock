@@ -42,6 +42,9 @@ public class EtsWidget extends AppWidgetProvider {
         String dateToDisplay = dateFormat.format(etsDate);
         mViews = new RemoteViews(context.getPackageName(), R.layout.ets_widget);
 
+        Intent intent = new Intent(context, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        mViews.setOnClickPendingIntent(R.id.fl_ets_widget, pendingIntent);
         mViews.setTextViewText(R.id.tv_date_of_separation, dateToDisplay);
         CountDown countDown = new CountDown((etsDate + (1000*60*60*24)) - System.currentTimeMillis(),1000, appWidgetManager,appWidgetId,mViews);
         countDown.start();
