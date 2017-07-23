@@ -20,7 +20,7 @@ import com.firebase.jobdispatcher.Trigger;
 
 import java.text.SimpleDateFormat;
 
-public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
+public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     public Context mainContext;
@@ -63,12 +63,5 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 .build();
         dispatcher.mustSchedule(notification);
 
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        if (s == getString(R.string.ets_date)){
-            scheduleNotifications();
-        }
     }
 }
