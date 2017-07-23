@@ -10,13 +10,17 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.format.DateUtils;
+import android.util.Log;
 
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Trigger;
 
-public class MainActivity extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
     private FragmentManager fragmentManager;
     public Context mainContext;
@@ -42,15 +46,29 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fl_fragment_container2, deadlineFragment, "deadlineFragment")
                 .commit();
 
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            scheduleNotifications();
+        }
+    }
+
+    private void scheduleNotifications(){
 
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
-
-        Job notificationJob = dispatcher.newJobBuilder()
+        Job notification = dispatcher.newJobBuilder()
                 .setService(EtsNotifications.class)
-                .setTag("notification")
-                .setTrigger(Trigger.executionWindow(20, 30))
+                .setTag("Notification")
+                .setRecurring(true)
+                .setTrigger(Trigger.executionWindow(60*60*24, (60*60*24)+120))
                 .setReplaceCurrent(true)
                 .build();
-        dispatcher.mustSchedule(notificationJob);
+        dispatcher.mustSchedule(notification);
+
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        if (s == getString(R.string.ets_date)){
+            scheduleNotifications();
+        }
     }
 }
