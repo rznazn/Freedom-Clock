@@ -26,7 +26,7 @@ public class EtsNotifications extends com.firebase.jobdispatcher.JobService {
         long now = System.currentTimeMillis();
         long timeTillSep = etsDate - now;
         long daysLeft = timeTillSep/(1000*60*60*24);
-        int daysLeftInt= (int) daysLeft;
+        int daysLeftInt= ((int) daysLeft) +1;
 
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent,
