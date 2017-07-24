@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -154,6 +156,13 @@ public class EtsFragment extends Fragment {
 
             }
         };
+        AppWidgetManager widgetManager = AppWidgetManager.getInstance(parentContext);
+        ComponentName widgetComponent = new ComponentName(parentContext, EtsWidget.class);
+        int[] widgetIds = widgetManager.getAppWidgetIds(widgetComponent);
+        Intent intent = new Intent();
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        parentContext.sendBroadcast(intent);
         countDownTimer.start();
     }
     protected Bitmap ConvertToBitmap(View layout) {

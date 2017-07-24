@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Freedom Clock</string>
     <string name="date_of_separation">date of separation:</string>
-    <string name="days_until_separation">days until separation:\ndays:hours:minutes:seconds</string>
+    <string name="days_until_separation">days until separation:</string>
+    <string name="time_left">time left on duty:\ndays:hours:minutes:seconds</string>
 
     <string name="set_ets_date">set ets date</string>
     <string name="confirm">confirm</string>

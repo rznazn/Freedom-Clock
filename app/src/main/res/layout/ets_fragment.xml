@@ -42,7 +42,7 @@
         <TextView
             style="@style/HeaderTextView"
             android:textAlignment="center"
-            android:text="@string/days_until_separation" />
+            android:text="@string/time_left" />
 
         <TextView
             android:id="@+id/tv_time_until"

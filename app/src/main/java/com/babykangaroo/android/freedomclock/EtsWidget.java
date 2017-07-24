@@ -6,78 +6,45 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.CountDownTimer;
-import android.provider.MediaStore;
 import android.support.v7.preference.PreferenceManager;
-import android.view.View;
-import android.widget.ImageView;
+import android.text.format.DateUtils;
 import android.widget.RemoteViews;
-import android.widget.RemoteViewsService;
-import android.widget.TextView;
-
-import java.text.SimpleDateFormat;
 
 /**
  * Created by Gene Denney on 7/23/2017.
  */
 
-public class EtsWidget extends AppWidgetProvider {
+public class EtsWidget extends AppWidgetProvider{
 
+    public static Context mContext;
+    public static AppWidgetManager mAppWidgetManager;
+    public static int mAppWidgetId;
 
 
     private static RemoteViews mViews;
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        mContext = context;
+        mAppWidgetManager = appWidgetManager;
+        mAppWidgetId = appWidgetIds[0];
         for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
+            updateEtsWidget(context, appWidgetManager, appWidgetId);
         }
     }
 
-    private static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+    private static void updateEtsWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         long etsDate = sharedPreferences.getLong(context.getString(R.string.ets_date), 0);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd");
-        String dateToDisplay = dateFormat.format(etsDate);
+        long daysLeft = ((etsDate-System.currentTimeMillis())/ DateUtils.DAY_IN_MILLIS) +1;
+
         mViews = new RemoteViews(context.getPackageName(), R.layout.ets_widget);
 
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         mViews.setOnClickPendingIntent(R.id.fl_ets_widget, pendingIntent);
-        mViews.setTextViewText(R.id.tv_date_of_separation, dateToDisplay);
-        CountDown countDown = new CountDown((etsDate + (1000*60*60*24)) - System.currentTimeMillis(),1000, appWidgetManager,appWidgetId,mViews);
-        countDown.start();
+        mViews.setTextViewText(R.id.tv_time_until, String.valueOf(daysLeft));
 
         appWidgetManager.updateAppWidget(appWidgetId, mViews);
     }
-}
 
- class CountDown extends CountDownTimer {
-    private RemoteViews mViews;
-    private AppWidgetManager mAppWidgetManager;
-    private int mAppWidgetId;
-
-    public CountDown(long millisInFuture, int countDownInterval,
-                     AppWidgetManager appWidgetManager, int appWidgetId, RemoteViews views) {
-        super(millisInFuture, countDownInterval);
-        mAppWidgetManager = appWidgetManager;
-        mAppWidgetId = appWidgetId;
-        mViews = views;
-    }
-
-    @Override
-    public void onFinish() {
-    }
-
-    @Override
-    public void onTick(long millisUntilFinished) {
-        long seconds = millisUntilFinished / 1000;
-        long minutes = seconds / 60;
-        long hours = minutes / 60;
-        long days = hours / 24;
-        String time = days + ":" + hours % 24 + ":" + minutes % 60 + ":" + seconds % 60;
-        mViews.setTextViewText(R.id.tv_time_until, time);
-        mAppWidgetManager.updateAppWidget(mAppWidgetId, mViews);
-    }
 }
