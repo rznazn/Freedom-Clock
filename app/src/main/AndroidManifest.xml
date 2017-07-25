@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.babykangaroo.android.freedomclock">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,9 +19,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".EtsFragment" />
-        <activity android:name=".DeadlineFragment"></activity>
+        <activity android:name=".DeadlineFragment" />
 
         <service android:name=".EtsNotifications" />
+
         <receiver android:name=".EtsWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -30,6 +32,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/ets_widget_info" />
         </receiver>
+
+        <activity android:name=".SelfieActivity"></activity>
     </application>
 
 </manifest>

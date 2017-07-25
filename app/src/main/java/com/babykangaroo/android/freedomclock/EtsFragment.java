@@ -40,6 +40,7 @@ public class EtsFragment extends Fragment {
     private long etsDate;
     private ImageView setETSdate;
     private ImageView shareEts;
+    private ImageView takeSelfie;
     private Context parentContext;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor spEditor;
@@ -76,6 +77,14 @@ public class EtsFragment extends Fragment {
                 intent.putExtra(Intent.EXTRA_STREAM, bmpUri);
                 intent.setType("image/png");
                 startActivity(intent);
+            }
+        });
+
+        takeSelfie = (ImageView) rootView.findViewById(R.id.iv_photo);
+        takeSelfie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(parentContext, SelfieActivity.class));
             }
         });
         if (sharedPreferences.contains(getString(R.string.ets_date))){
