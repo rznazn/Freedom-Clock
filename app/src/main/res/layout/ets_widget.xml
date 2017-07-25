@@ -22,12 +22,12 @@
         android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <TextView
             style="@style/HeaderTextView"
             android:layout_margin="12dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center_vertical"
             android:text="@string/days_until_separation" />
 
         <TextView

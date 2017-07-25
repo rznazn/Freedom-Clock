@@ -33,7 +33,8 @@
                 android:resource="@xml/ets_widget_info" />
         </receiver>
 
-        <activity android:name=".SelfieActivity"></activity>
+        <activity android:name=".SelfieActivity"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

@@ -33,6 +33,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:preference-v7:25.3.1'
     compile 'com.firebase:firebase-jobdispatcher:0.7.0'
+    compile 'com.flurgle:camerakit:0.9.17'
     compile 'com.github.halysongoncalves:pugnotification:1.8.1'
     testCompile 'junit:junit:4.12'
 }

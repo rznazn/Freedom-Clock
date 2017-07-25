@@ -5,15 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.babykangaroo.android.freedomclock.SelfieActivity">
+
+    <com.flurgle.camerakit.CameraView
+        android:id="@+id/cv_selfie"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_margin="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:src="@drawable/ic_camera"/>
+
+    </com.flurgle.camerakit.CameraView>
+
     <FrameLayout
         android:id="@+id/fl_to_draw"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="invisible">
     <ImageView
         android:id="@+id/iv_selfie_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tv_time_left"
+            style="@style/ContentTextViewEts"
+            android:textColor="@android:color/holo_red_light"
+            android:layout_gravity="center_vertical"/>
     </FrameLayout>
+    <FrameLayout
+        android:id="@+id/fl_landing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ImageView
         android:id="@+id/iv_share"
         android:layout_width="wrap_content"
@@ -27,5 +55,6 @@
         style="@style/ContentTextViewEts"
         android:text="@string/take_selfie"
         android:layout_gravity="center_vertical"/>
+    </FrameLayout>
 
 </FrameLayout>
