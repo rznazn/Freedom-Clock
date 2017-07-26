@@ -19,4 +19,5 @@
     <string name="days_until_freedom">DAYS UNTIL FREEDOM</string>
     <string name="schedule">schedule</string>
     <string name="delete">delete</string>
+    <string name="bad_entry">invalid entry</string>
 </resources>

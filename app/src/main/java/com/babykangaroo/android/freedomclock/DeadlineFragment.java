@@ -133,14 +133,36 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
-
                     Bundle bundle = new Bundle();
                     bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.app_name));
                     bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "calendar");
                     MainActivity.mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
-                    long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), 0);
-                    long scheduleDate = etsDate - (daysPrior* DateUtils.DAY_IN_MILLIS);
+
+                    String event = etTask.getText().toString();
+                    String daysBefore = etDaysPrior.getText().toString();
+                    if (event.isEmpty() || daysBefore.isEmpty()){
+                        Toast.makeText(parentContext, getString(R.string.bad_entry), Toast.LENGTH_LONG).show();
+                        return;}
+                    int daysBeforeInt = Integer.valueOf(daysBefore);
+
+                    boolean update = (name != null);
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put(ListContract.ListContractEntry.COLUMN_ITEM_NAME, event);
+                    contentValues.put(ListContract.ListContractEntry.COLUMN_ITEM_DATE, daysBefore);
+                    if (update){
+                        String[] args = new String[1];
+                        args[0] = String.valueOf(itemId);
+                        getActivity().getContentResolver().update(ListContract.ListContractEntry.ITEMS_CONTENT_URI,
+                                contentValues,
+                                ListContract.ListContractEntry._ID + " = ? ",
+                                args);
+                    }else {
+                        Uri uri = getActivity().getContentResolver().insert(ListContract.ListContractEntry.ITEMS_CONTENT_URI, contentValues);
+                    }
+
+                    long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), System.currentTimeMillis());
+                    long scheduleDate = etsDate - (daysBeforeInt* DateUtils.DAY_IN_MILLIS);
                     Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
                     builder.appendPath("time");
                     ContentUris.appendId(builder, scheduleDate);
@@ -153,6 +175,12 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
+                    String event = etTask.getText().toString();
+                    String daysBefore = etDaysPrior.getText().toString();
+                    if (event.isEmpty() || daysBefore.isEmpty()){
+                        Toast.makeText(parentContext, getString(R.string.bad_entry), Toast.LENGTH_LONG).show();
+                        return;}
+                    int daysBeforeInt = Integer.valueOf(daysBefore);
 
                     Bundle bundle = new Bundle();
                     bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.app_name));
@@ -160,12 +188,9 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
                     MainActivity.mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
                     boolean update = (name != null);
-                    String task = etTask.getText().toString();
-                    int daysPrior = Integer.valueOf(etDaysPrior.getText().toString());
-                    long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), System.currentTimeMillis());
                     ContentValues contentValues = new ContentValues();
-                    contentValues.put(ListContract.ListContractEntry.COLUMN_ITEM_NAME, task);
-                    contentValues.put(ListContract.ListContractEntry.COLUMN_ITEM_DATE, daysPrior);
+                    contentValues.put(ListContract.ListContractEntry.COLUMN_ITEM_NAME, event);
+                    contentValues.put(ListContract.ListContractEntry.COLUMN_ITEM_DATE, daysBeforeInt);
                     if (update){
                         String[] args = new String[1];
                         args[0] = String.valueOf(itemId);
