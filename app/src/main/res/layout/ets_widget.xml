@@ -19,22 +19,21 @@
         android:alpha=".35"
         android:src="@drawable/u_s__department_of_the_army_da_seal1_5" />
     <LinearLayout
-        android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_time_until"
+            style="@style/ContentTextViewEts"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="0:0:0:0" />
+        <TextView
             style="@style/HeaderTextView"
             android:layout_margin="12dp"
             android:layout_gravity="center_vertical"
-            android:text="@string/days_until_separation" />
-
-        <TextView
-            android:id="@+id/tv_time_until"
-            style="@style/ContentTextViewEts"
-            android:layout_gravity="center_vertical"
-            android:text="0:0:0:0" />
+            android:text="@string/days_until_freedom" />
     </LinearLayout>
 
 </FrameLayout>
