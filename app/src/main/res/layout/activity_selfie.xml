@@ -7,37 +7,20 @@
     xmlns:camerakit="http://schemas.android.com/apk/res-auto"
     tools:context="com.babykangaroo.android.freedomclock.SelfieActivity">
 
-    <com.flurgle.camerakit.CameraView
-        android:id="@+id/cv_selfie"
-        camerakit:ckFacing="front"
-        android:visibility="invisible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_photo"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_margin="12dp"
-            android:src="@drawable/ic_camera"
-            android:layout_gravity="center_horizontal|bottom"/>
-
-
-    </com.flurgle.camerakit.CameraView>
 
     <FrameLayout
         android:id="@+id/fl_to_draw_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible">
+        android:layout_height="match_parent">
         <FrameLayout
             android:id="@+id/fl_to_draw_actual"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
     <ImageView
         android:id="@+id/iv_selfie_container"
+        android:scaleType="fitCenter"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
         <TextView
             android:id="@+id/tv_time_left"
@@ -53,11 +36,11 @@
             android:src="@drawable/ic_share_black_24dp"
             android:layout_gravity="bottom|end"/>
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_retake"
+            android:id="@+id/fab_photo"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_margin="12dp"
-            android:src="@drawable/ic_redo"
+            android:src="@drawable/ic_camera"
             android:layout_gravity="start|bottom"/>
     </FrameLayout>
 

@@ -26,20 +26,19 @@ public class SelfieActivity extends AppCompatActivity {
 
     private FrameLayout imageContainer;
     private FrameLayout toDraw;
-    private CameraView cameraView;
     private TextView timeLeft;
     private long daysLeft;
     private String message;
     private FloatingActionButton takePicture;
-    private FloatingActionButton retake;
     private ImageView selfieContainer;
     private FloatingActionButton shareFab;
+    private static final int REQUEST_IMAGE_CAPTURE = 9988;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selfie);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         long etsDate = PreferenceManager.getDefaultSharedPreferences(this).getLong(getString(R.string.ets_date), 0);
         long now = System.currentTimeMillis();
@@ -58,15 +57,6 @@ public class SelfieActivity extends AppCompatActivity {
                 sharePhoto();
             }
         });
-        cameraView = (CameraView) findViewById(R.id.cv_selfie);
-        cameraView.setCameraListener(new CameraListener() {
-            @Override
-            public void onPictureTaken(byte[] jpeg) {
-                selfieContainer.setImageBitmap(BitmapFactory.decodeByteArray(jpeg,0,jpeg.length));
-                showPhoto();
-            }
-        });
-        cameraView.setFacing(CameraKit.Constants.FACING_FRONT);
         imageContainer = (FrameLayout) findViewById(R.id.fl_to_draw_container);
         toDraw = (FrameLayout) findViewById(R.id.fl_to_draw_actual);
 
@@ -74,40 +64,21 @@ public class SelfieActivity extends AppCompatActivity {
         takePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cameraView.captureImage();
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
-        });
+        }});
 
-        retake = (FloatingActionButton) findViewById(R.id.fab_retake);
-        retake.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showCamera();
-            }
-        });
-        showCamera();
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        cameraView.stop();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    void showCamera(){
-        imageContainer.setVisibility(View.INVISIBLE);
-        cameraView.setVisibility(View.VISIBLE);
-        cameraView.start();
-    }
-
-    void showPhoto(){
-        imageContainer.setVisibility(View.VISIBLE);
-        cameraView.setVisibility(View.INVISIBLE);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            selfieContainer.setImageBitmap(imageBitmap);
+        }
     }
 
     void sharePhoto(){
