@@ -17,6 +17,7 @@ import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Trigger;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.text.SimpleDateFormat;
 
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     public static SharedPreferences mainSharedPreferences;
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 9998;
 
+    public static FirebaseAnalytics mFirebaseAnalytics;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mainContext = this;
         mainSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         fragmentManager = getFragmentManager();
 
         ActivityCompat.requestPermissions(this,

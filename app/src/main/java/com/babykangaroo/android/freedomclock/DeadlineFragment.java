@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.babykangaroo.android.mydatabaselibrary.ListContract;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.text.SimpleDateFormat;
 
@@ -131,6 +132,13 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
             builder.setNegativeButton(R.string.schedule, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.app_name));
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "calendar");
+                    MainActivity.mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
                     long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), 0);
                     long scheduleDate = etsDate - (daysPrior* DateUtils.DAY_IN_MILLIS);
                     Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
@@ -144,6 +152,13 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
             builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.app_name));
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "setDate");
+                    MainActivity.mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
                     boolean update = (name != null);
                     String task = etTask.getText().toString();
                     int daysPrior = Integer.valueOf(etDaysPrior.getText().toString());

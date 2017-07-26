@@ -1,9 +1,7 @@
 package com.babykangaroo.android.freedomclock;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -13,14 +11,12 @@ import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
 import android.text.format.DateUtils;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.flurgle.camerakit.CameraKit;
-import com.flurgle.camerakit.CameraListener;
-import com.flurgle.camerakit.CameraView;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 
 public class SelfieActivity extends AppCompatActivity {
 
@@ -38,7 +34,6 @@ public class SelfieActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selfie);
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         long etsDate = PreferenceManager.getDefaultSharedPreferences(this).getLong(getString(R.string.ets_date), 0);
         long now = System.currentTimeMillis();
@@ -82,6 +77,11 @@ public class SelfieActivity extends AppCompatActivity {
     }
 
     void sharePhoto(){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.app_name));
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "shareSelfie");
+        MainActivity.mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
         Bitmap bitmap = ConvertToBitmap(toDraw);String pathofBmp =
                 MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap,"title", null);

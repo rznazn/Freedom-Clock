@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "570539631633",
+    "firebase_url": "https://freedom-clock-174901.firebaseio.com",
+    "project_id": "freedom-clock-174901",
+    "storage_bucket": "freedom-clock-174901.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570539631633:android:c089509a891df792",
+        "android_client_info": {
+          "package_name": "com.babykangaroo.android.freedomclock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570539631633-r84gfk8kf55mhkagk0fncko2p7d5nu64.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.babykangaroo.android.freedomclock",
+            "certificate_hash": "28db66c4b7938200bc8fe0f707cc3e43b2b9fd13"
+          }
+        },
+        {
+          "client_id": "570539631633-pv3g7t8238e7tdck6dse8aqb3th9e90a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA873sIttkDqfQ01idnNCycDJWKCNtgNFY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570539631633-pv3g7t8238e7tdck6dse8aqb3th9e90a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

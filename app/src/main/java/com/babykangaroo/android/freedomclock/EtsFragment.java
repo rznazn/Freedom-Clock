@@ -30,6 +30,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -71,6 +73,11 @@ public class EtsFragment extends Fragment {
         shareEts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.app_name));
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "share");
+                MainActivity.mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
                 Bitmap bitmap = ConvertToBitmap(toDraw);String pathofBmp =
                         MediaStore.Images.Media.insertImage(parentContext.getContentResolver(), bitmap,"title", null);
