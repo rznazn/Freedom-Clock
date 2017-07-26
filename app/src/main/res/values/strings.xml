@@ -17,4 +17,5 @@
     <string name="deadline_days_prior">Enter number of days prior to separation</string>
     <string name="take_selfie">SMILE</string>
     <string name="days_until_freedom">DAYS UNTIL FREEDOM</string>
+    <string name="schedule">schedule</string>
 </resources>

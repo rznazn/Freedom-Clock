@@ -3,20 +3,24 @@ package com.babykangaroo.android.freedomclock;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,7 +120,20 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
 
             AlertDialog.Builder builder = new AlertDialog.Builder(parentContext);
             builder.setView(adView);
-            builder.setNegativeButton(getString(R.string.cancel), null);
+            builder.setNeutralButton(getString(R.string.cancel), null);
+            builder.setNegativeButton(R.string.schedule, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), 0);
+                    long scheduleDate = etsDate - (daysPrior* DateUtils.DAY_IN_MILLIS);
+                    Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+                    builder.appendPath("time");
+                    ContentUris.appendId(builder, scheduleDate);
+                    Intent intent = new Intent(Intent.ACTION_VIEW)
+                            .setData(builder.build());
+                    startActivity(intent);
+                }
+            });
             builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
