@@ -120,7 +120,14 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
 
             AlertDialog.Builder builder = new AlertDialog.Builder(parentContext);
             builder.setView(adView);
-            builder.setNeutralButton(getString(R.string.cancel), null);
+            builder.setNeutralButton(R.string.delete, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    parentContext.getContentResolver().delete(ListContract.ListContractEntry.ITEMS_CONTENT_URI,
+                            ListContract.ListContractEntry._ID + " = ? ",
+                            new String[]{String.valueOf(itemId)});
+                }
+            });
             builder.setNegativeButton(R.string.schedule, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
