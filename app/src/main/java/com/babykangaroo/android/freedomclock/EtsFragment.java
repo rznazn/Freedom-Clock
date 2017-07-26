@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ public class EtsFragment extends Fragment {
 
     private TextView tvEtsDateView;
     private TextView tvDaysTillSeperation;
+    private FrameLayout toDraw;
     private long etsDate;
     private ImageView setETSdate;
     private ImageView shareEts;
@@ -53,6 +55,7 @@ public class EtsFragment extends Fragment {
         parentContext = getActivity();
         sharedPreferences = MainActivity.mainSharedPreferences;
 
+        toDraw = (FrameLayout) rootView.findViewById(R.id.fl_to_draw_actual);
         tvEtsDateView = (TextView) rootView.findViewById(R.id.tv_date_of_separation);
         tvDaysTillSeperation = (TextView) rootView.findViewById(R.id.tv_time_until);
         setETSdate = (ImageView) rootView.findViewById(R.id.iv_set_date);
@@ -69,7 +72,7 @@ public class EtsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Bitmap bitmap = ConvertToBitmap(rootView);String pathofBmp =
+                Bitmap bitmap = ConvertToBitmap(toDraw);String pathofBmp =
                         MediaStore.Images.Media.insertImage(parentContext.getContentResolver(), bitmap,"title", null);
                 Uri bmpUri = Uri.parse(pathofBmp);
                 Intent intent = new Intent(Intent.ACTION_SEND);
