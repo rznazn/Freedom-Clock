@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
 import android.text.format.DateUtils;
+import android.widget.ImageView;
 import android.widget.RemoteViews;
 
 /**
@@ -35,9 +36,28 @@ public class EtsWidget extends AppWidgetProvider{
     private static void updateEtsWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         long etsDate = sharedPreferences.getLong(context.getString(R.string.ets_date), 0);
+        String branch = sharedPreferences.getString(mContext.getString(R.string.branch_pref), mContext.getString(R.string.Army));
         long daysLeft = ((etsDate-System.currentTimeMillis())/ DateUtils.DAY_IN_MILLIS) +1;
 
         mViews = new RemoteViews(context.getPackageName(), R.layout.ets_widget);
+
+        switch (branch){
+            case "Army":
+                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.u_s__department_of_the_army_da_seal1_5);
+                break;
+            case "Marines":
+                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.emblem_marines);
+                break;
+            case "Navy":
+                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.navyemblem);
+                break;
+            case "Air Force":
+                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.department_of_the_air_force_57f5d_250x250);
+                break;
+            default:
+                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.u_s__department_of_the_army_da_seal1_5);
+                break;
+        }
 
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
