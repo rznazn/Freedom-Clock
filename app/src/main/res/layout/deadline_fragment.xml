@@ -28,7 +28,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_margin="12dp"
-        android:src="@drawable/ic_add"
+        android:src="?attr/add"
         android:layout_gravity="bottom|end"/>
         <TextView
             android:id="@+id/tv_rv_empty_view"

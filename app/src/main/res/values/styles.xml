@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- themes for text views -->
     <style name="HeaderTextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -29,9 +30,68 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">40sp</item>
     </style>
+
     <style name="ContentTextViewDeadline" parent="ContentTextView">
         <item name="android:textSize">16sp</item>
         <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <!-- Themes for different branches -->
+
+
+    <attr name="insignia" format="reference" />
+    <attr name="add" format="reference"/>
+    <attr name="share" format="reference"/>
+    <attr name="settings" format="reference"/>
+    <attr name="camera" format="reference"/>
+    <attr name="branchBackground" format="color"/>
+
+    <style name="ArmyTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#424242</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">#FFEA00</item>
+        <item name="insignia">@drawable/u_s__department_of_the_army_da_seal1_5</item>
+        <item name="add">@drawable/ic_add_blk</item>
+        <item name="share">@drawable/ic_share_black_24dp</item>
+        <item name="settings">@drawable/ic_settings_black_24dp</item>
+        <item name="camera">@drawable/ic_camera_blk</item>
+        <item name="branchBackground">#A5D6A7</item>
+    </style>
+
+    <style name="MarineTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#F44336</item>
+        <item name="colorPrimaryDark">#B71C1C</item>
+        <item name="colorAccent">#304FFE</item>
+        <item name="insignia">@drawable/emblem_marines</item>
+        <item name="add">@drawable/ic_add_blk</item>
+        <item name="share">@drawable/ic_share_black_24dp</item>
+        <item name="settings">@drawable/ic_settings_black_24dp</item>
+        <item name="camera">@drawable/ic_camera_blk</item>
+        <item name="branchBackground">#BCAAA4</item>
+    </style>
+
+    <style name="NavyTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#2196F3</item>
+        <item name="colorPrimaryDark">#1565C0</item>
+        <item name="colorAccent">#FFEA00</item>
+        <item name="insignia">@drawable/navyemblem</item>
+        <item name="add">@drawable/ic_add_blk</item>
+        <item name="share">@drawable/ic_share_black_24dp</item>
+        <item name="settings">@drawable/ic_settings_black_24dp</item>
+        <item name="camera">@drawable/ic_camera_blk</item>
+        <item name="branchBackground">#81D4FA</item>
+    </style>
+
+    <style name="AirForceTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#0288D1</item>
+        <item name="colorPrimaryDark">#01579B</item>
+        <item name="colorAccent">#BDBDBD</item>
+        <item name="insignia">@drawable/department_of_the_air_force_57f5d_250x250</item>
+        <item name="add">@drawable/ic_add_blk</item>
+        <item name="share">@drawable/ic_share_black_24dp</item>
+        <item name="settings">@drawable/ic_settings_black_24dp</item>
+        <item name="camera">@drawable/ic_camera_blk</item>
+        <item name="branchBackground">#84FFFF</item>
     </style>
 
 </resources>

@@ -32,6 +32,7 @@ public class SelfieActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.MarineTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selfie);
 

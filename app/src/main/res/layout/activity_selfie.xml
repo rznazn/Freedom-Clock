@@ -25,7 +25,7 @@
         <TextView
             android:id="@+id/tv_time_left"
             style="@style/ContentTextViewEts"
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="?attr/colorAccent"
             android:layout_gravity="center_vertical|bottom"/>
         </FrameLayout>
         <android.support.design.widget.FloatingActionButton
@@ -33,14 +33,14 @@
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_margin="12dp"
-            android:src="@drawable/ic_share_black_24dp"
+            android:src="?attr/share"
             android:layout_gravity="bottom|end"/>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_photo"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_margin="12dp"
-            android:src="@drawable/ic_camera"
+            android:src="?attr/camera"
             android:layout_gravity="start|bottom"/>
     </FrameLayout>
 

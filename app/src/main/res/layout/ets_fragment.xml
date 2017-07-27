@@ -14,7 +14,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"/>
+        android:background="?attr/branchBackground"/>
 
     <ImageView
         android:id="@+id/iv_branch_insignia"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:alpha=".35"
-        android:src="@drawable/u_s__department_of_the_army_da_seal1_5" />
+        android:src="?attr/insignia" />
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -58,17 +58,17 @@
         android:id="@+id/iv_set_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_settings_black_24dp"/>
+        android:src="?attr/settings"/>
     <ImageView
         android:id="@+id/iv_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|top"
-        android:src="@drawable/ic_share_black_24dp"/>
+        android:src="?attr/share"/>
     <ImageView
         android:id="@+id/iv_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_camera"/>
+        android:src="?attr/camera"/>
 </FrameLayout>
