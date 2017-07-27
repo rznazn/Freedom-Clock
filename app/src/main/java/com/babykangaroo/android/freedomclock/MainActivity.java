@@ -17,6 +17,8 @@ import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Trigger;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.text.SimpleDateFormat;
@@ -29,12 +31,19 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 9998;
 
     public static FirebaseAnalytics mFirebaseAnalytics;
+    private AdView mAdView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        mAdView = (AdView) findViewById(R.id.av_ads);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         mainContext = this;
         mainSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 

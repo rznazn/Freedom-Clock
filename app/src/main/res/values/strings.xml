@@ -20,4 +20,7 @@
     <string name="schedule">schedule</string>
     <string name="delete">delete</string>
     <string name="bad_entry">invalid entry</string>
+
+
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>
