@@ -15,7 +15,9 @@ public class ListDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME =  "items.db";
     private static final int DATABASE_VERSION = 1;
 
-    /** public constructor for new instance of the PetDbHelper*/
+    /** public constructor
+     * @param context
+     */
     public ListDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

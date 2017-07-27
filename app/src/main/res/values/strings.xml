@@ -4,7 +4,7 @@
     <string name="days_until_separation">days until separation:</string>
     <string name="time_left">time left on duty:\ndays:hours:minutes:seconds</string>
 
-    <string name="set_ets_date">set ets date</string>
+    <string name="set_ets_date">set ETS/EAS date and branch</string>
     <string name="confirm">confirm</string>
     <string name="year_pref">yearPref</string>
     <string name="month_pref">monthPref</string>
@@ -21,6 +21,7 @@
     <string name="delete">delete</string>
     <string name="bad_entry">invalid entry</string>
 
+    <!-- strings for branch prefs-->
     <string name="Army" translatable="false">Army</string>
     <string name="Marines" translatable="false">Marines</string>
     <string name="Navy" translatable="false">Navy</string>
