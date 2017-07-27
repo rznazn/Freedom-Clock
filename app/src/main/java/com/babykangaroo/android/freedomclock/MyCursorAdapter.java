@@ -17,6 +17,9 @@ import java.text.SimpleDateFormat;
  * Created by Gene Denney on 7/22/2017.
  */
 
+/**
+ * cursor adapter for deadline fragment
+ */
 public class MyCursorAdapter extends RecyclerView.Adapter<MyCursorAdapter.DeadlineViewHolder>
         implements SharedPreferences.OnSharedPreferenceChangeListener {
 

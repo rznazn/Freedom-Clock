@@ -1,11 +1,13 @@
 package com.babykangaroo.android.freedomclock;
 
+import android.*;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
@@ -17,7 +19,9 @@ import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-
+/**
+ * activity for taking and sharing selfies with time left overlay
+ */
 public class SelfieActivity extends AppCompatActivity {
 
     private FrameLayout imageContainer;
@@ -29,12 +33,20 @@ public class SelfieActivity extends AppCompatActivity {
     private ImageView selfieContainer;
     private FloatingActionButton shareFab;
     private static final int REQUEST_IMAGE_CAPTURE = 9988;
+    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 9998;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setBranchTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selfie);
+
+        /**
+         * request media permissions required for sharing photos
+         */
+        ActivityCompat.requestPermissions(this,
+                new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 
         long etsDate = PreferenceManager.getDefaultSharedPreferences(this).getLong(getString(R.string.ets_date), 0);
         long now = System.currentTimeMillis();
@@ -68,6 +80,12 @@ public class SelfieActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * hanlde returned image from camers
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -78,6 +96,7 @@ public class SelfieActivity extends AppCompatActivity {
     }
 
     void sharePhoto(){
+
 
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.app_name));

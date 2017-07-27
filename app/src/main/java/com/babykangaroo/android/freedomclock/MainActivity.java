@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private FragmentManager fragmentManager;
     public Context mainContext;
     public static SharedPreferences mainSharedPreferences;
-    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 9998;
     public static FirebaseAnalytics mFirebaseAnalytics;
 
     private AdView mAdView;
@@ -62,9 +61,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         fragmentManager = getFragmentManager();
 
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+        //set fragments
         EtsFragment etsFragment = new EtsFragment();
         DeadlineFragment deadlineFragment = new DeadlineFragment();
         fragmentManager.beginTransaction()
@@ -72,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 .replace(R.id.fl_fragment_container2, deadlineFragment, "deadlineFragment")
                 .commit();
 
+        /**
+         * check android version for compatability for notifications
+         */
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
             scheduleNotifications();
         }
