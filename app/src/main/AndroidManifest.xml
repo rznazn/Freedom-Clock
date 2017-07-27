@@ -38,7 +38,8 @@
         </receiver>
 
         <activity android:name=".SelfieActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:configChanges="orientation|screenSize"/>
     </application>
 
 </manifest>
