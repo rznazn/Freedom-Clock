@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 .setService(EtsNotifications.class)
                 .setTag("Notification")
                 .setRecurring(true)
-                .setTrigger(Trigger.executionWindow((60*60*36), (60*60*36)+120))
+                .setTrigger(Trigger.executionWindow(5, 10))
                 .setReplaceCurrent(true)
                 .build();
         dispatcher.mustSchedule(notification);

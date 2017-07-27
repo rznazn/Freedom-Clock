@@ -1,9 +1,6 @@
 package com.babykangaroo.android.freedomclock;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -16,19 +13,14 @@ import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -38,19 +30,27 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * this class manages the ets fragment that shows ets date and remaining time
+ */
 public class EtsFragment extends Fragment {
-
-    private TextView tvEtsDateView;
-    private TextView tvDaysTillSeperation;
-    private FrameLayout toDraw;
-    private long etsDate;
-    private ImageView setETSdate;
-    private ImageView shareEts;
-    private ImageView takeSelfie;
+    /**
+     * context variables
+     */
     private Context parentContext;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor spEditor;
     private CountDownTimer countDownTimer;
+    private long etsDate;
+    /**
+     * view variables
+     */
+    private TextView tvEtsDateView;
+    private TextView tvDaysTillSeperation;
+    private FrameLayout toDraw;
+    private ImageView setETSdate;
+    private ImageView shareEts;
+    private ImageView takeSelfie;
 
     @Nullable
     @Override
@@ -81,7 +81,7 @@ public class EtsFragment extends Fragment {
                 bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "share");
                 MainActivity.mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
-                Bitmap bitmap = ConvertToBitmap(toDraw);String pathofBmp =
+                Bitmap bitmap = convertToBitmap(toDraw);String pathofBmp =
                         MediaStore.Images.Media.insertImage(parentContext.getContentResolver(), bitmap,"title", null);
                 Uri bmpUri = Uri.parse(pathofBmp);
                 Intent intent = new Intent(Intent.ACTION_SEND);
@@ -99,6 +99,9 @@ public class EtsFragment extends Fragment {
                 startActivity(new Intent(parentContext, SelfieActivity.class));
             }
         });
+        /**
+         * if ets date pref is null (fresh install) show date picker
+         */
         if (sharedPreferences.contains(getString(R.string.ets_date))){
             setViews();
 
@@ -108,6 +111,9 @@ public class EtsFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * shows date picker to select ets date and branch
+     */
     private void showDatePickerAd() {
         final View adView = getActivity().getLayoutInflater().inflate(R.layout.date_picker, null);
         final DatePicker datePicker = (DatePicker) adView.findViewById(R.id.dp_datePicker);
@@ -170,6 +176,9 @@ public class EtsFragment extends Fragment {
 
     }
 
+    /**
+     * set views to display information based on the preferences
+     */
     private void setViews(){
         if (countDownTimer != null){
             countDownTimer.cancel();
@@ -183,7 +192,6 @@ public class EtsFragment extends Fragment {
         countDownTimer = new CountDownTimer((etsDate + (1000*60*60*24)) - System.currentTimeMillis(), 1000) {
             @Override
             public void onTick(long l) {
-//                long daysUntil = timeUntil/(1000*60*60*24);
                 long seconds = l / 1000;
                 long minutes = seconds / 60;
                 long hours = minutes / 60;
@@ -206,7 +214,12 @@ public class EtsFragment extends Fragment {
         parentContext.sendBroadcast(intent);
         countDownTimer.start();
     }
-    protected Bitmap ConvertToBitmap(View layout) {
+
+    /**
+     * @param layout is converted to bitmap for share intent
+     * @return
+     */
+    protected Bitmap convertToBitmap(View layout) {
         Bitmap map = Bitmap.createBitmap(layout.getMeasuredWidth(),
                 layout.getMeasuredHeight(),
                 Bitmap.Config.ARGB_8888);

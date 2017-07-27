@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 import br.com.goncalves.pugnotification.interfaces.ImageLoader;
 import br.com.goncalves.pugnotification.interfaces.OnImageLoadingCompleted;
@@ -20,17 +21,47 @@ import br.com.goncalves.pugnotification.notification.PugNotification;
  * Created by Gene Denney on 7/23/2017.
  */
 
+/**
+ * class handles notifications
+ * tagged for min android version
+ */
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class EtsNotifications extends com.firebase.jobdispatcher.JobService {
 
+    private int inginiaId;
+    private Context context;
+
     @Override
     public boolean onStartJob(com.firebase.jobdispatcher.JobParameters job) {
+        context = getApplicationContext();
 
+        /**
+         * load preferences and parse
+         */
         long etsDate = PreferenceManager.getDefaultSharedPreferences(this).getLong(getString(R.string.ets_date), 0);
         long now = System.currentTimeMillis();
         long timeTillSep = etsDate - now;
         long daysLeft = timeTillSep/(1000*60*60*24);
         int daysLeftInt= ((int) daysLeft) +1;
+
+        String branch = PreferenceManager.getDefaultSharedPreferences(this).getString(getString(R.string.branch_pref), getString(R.string.Army));
+        switch (branch){
+            case "Army":
+                inginiaId = context.getResources().getIdentifier("u_s__department_of_the_army_da_seal1_5", "drawable", context.getPackageName());
+                break;
+            case "Marines":
+                inginiaId = context.getResources().getIdentifier("emblem_marines", "drawable", context.getPackageName());
+                break;
+            case "Navy":
+                inginiaId = context.getResources().getIdentifier("navyemblem", "drawable", context.getPackageName());
+                break;
+            case "Air Force":
+                inginiaId = context.getResources().getIdentifier("department_of_the_air_force_57f5d_250x250", "drawable", context.getPackageName());
+                break;
+            default:
+                inginiaId = context.getResources().getIdentifier("u_s__department_of_the_army_da_seal1_5", "drawable", context.getPackageName());
+                break;
+        }
 
         ImageLoader imageLoader = new ImageLoader() {
             @Override
@@ -40,7 +71,7 @@ public class EtsNotifications extends com.firebase.jobdispatcher.JobService {
 
             @Override
             public void load(int imageResId, OnImageLoadingCompleted onCompleted) {
-                Bitmap map = BitmapFactory.decodeResource(getResources(), R.drawable.u_s__department_of_the_army_da_seal1_5);
+                Bitmap map = BitmapFactory.decodeResource(getResources(), imageResId);
                 onCompleted.imageLoadingCompleted(map);
             }
         };
@@ -55,7 +86,7 @@ public class EtsNotifications extends com.firebase.jobdispatcher.JobService {
                 .click(MainActivity.class)
                 .autoCancel(true)
                 .custom()
-                .background(R.drawable.u_s__department_of_the_army_da_seal1_5)
+                .background(inginiaId)
                 .setImageLoader(imageLoader)
                 .build();
         return false;
