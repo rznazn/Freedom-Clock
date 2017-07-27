@@ -44,6 +44,9 @@ public class EtsNotifications extends com.firebase.jobdispatcher.JobService {
         long daysLeft = timeTillSep/(1000*60*60*24);
         int daysLeftInt= ((int) daysLeft) +1;
 
+        /**
+         * set insigniaId to resource based on branch pref
+         */
         String branch = PreferenceManager.getDefaultSharedPreferences(this).getString(getString(R.string.branch_pref), getString(R.string.Army));
         switch (branch){
             case "Army":
@@ -79,7 +82,7 @@ public class EtsNotifications extends com.firebase.jobdispatcher.JobService {
         PugNotification.with(getApplicationContext())
                 .load()
                 .title(getString(R.string.app_name))
-                .message(String.valueOf(daysLeftInt) + " days left till FREEDOM!!!")
+                .message(String.valueOf(daysLeftInt) + getString(R.string.notification_text))
                 .smallIcon(R.drawable.small_icon)
                 .largeIcon(R.drawable.small_icon)
                 .flags(Notification.DEFAULT_ALL)

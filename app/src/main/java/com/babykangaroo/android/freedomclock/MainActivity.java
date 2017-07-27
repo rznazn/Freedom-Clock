@@ -24,14 +24,20 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.text.SimpleDateFormat;
 
+/**
+ * activity that houses and shows the ets and deadline fragments
+ */
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
+    /**
+     * context variables
+     */
     private FragmentManager fragmentManager;
     public Context mainContext;
     public static SharedPreferences mainSharedPreferences;
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 9998;
-
     public static FirebaseAnalytics mFirebaseAnalytics;
+
     private AdView mAdView;
 
 
@@ -78,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 .setService(EtsNotifications.class)
                 .setTag("Notification")
                 .setRecurring(true)
-                .setTrigger(Trigger.executionWindow(5, 10))
+                .setTrigger(Trigger.executionWindow((60*60*36), (60*60*36)+120))
                 .setReplaceCurrent(true)
                 .build();
         dispatcher.mustSchedule(notification);

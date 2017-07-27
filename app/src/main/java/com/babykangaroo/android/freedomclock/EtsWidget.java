@@ -17,12 +17,15 @@ import android.widget.RemoteViews;
 
 public class EtsWidget extends AppWidgetProvider{
 
+    /**
+     * context variables
+     */
     public static Context mContext;
     public static AppWidgetManager mAppWidgetManager;
     public static int mAppWidgetId;
 
-
     private static RemoteViews mViews;
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         mContext = context;
