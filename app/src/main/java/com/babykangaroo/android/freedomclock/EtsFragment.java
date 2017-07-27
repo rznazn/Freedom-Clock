@@ -21,6 +21,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -109,8 +111,26 @@ public class EtsFragment extends Fragment {
     private void showDatePickerAd() {
         final View adView = getActivity().getLayoutInflater().inflate(R.layout.date_picker, null);
         final DatePicker datePicker = (DatePicker) adView.findViewById(R.id.dp_datePicker);
+        final Spinner branchPicker = (Spinner) adView.findViewById(R.id.sp_branch_selector);
         if (sharedPreferences.contains(getString(R.string.ets_date))){
             long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), 0);
+            String branch = sharedPreferences.getString(getString(R.string.branch_pref), getString(R.string.Army));
+            int branchId = 0;
+            switch (branch){
+                case "Army":
+                    branchId=0;
+                    break;
+                case "Marines":
+                    branchId = 1;
+                    break;
+                case "Navy":
+                    branchId = 2;
+                    break;
+                case "Air Force":
+                    branchId = 3;
+                    break;
+            }
+            branchPicker.setSelection(branchId);
             Date date = new Date(etsDate);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
@@ -126,6 +146,7 @@ public class EtsFragment extends Fragment {
                 int year = datePicker.getYear();
                 int month = datePicker.getMonth();
                 int day = datePicker.getDayOfMonth();
+                String branch = String.valueOf(branchPicker.getSelectedItem());
                 Calendar cal = Calendar.getInstance();
                 cal.set(Calendar.DAY_OF_MONTH, day);
                 cal.set(Calendar.MONTH, month);
@@ -137,6 +158,7 @@ public class EtsFragment extends Fragment {
                 etsDate = cal.getTimeInMillis();
                 spEditor = sharedPreferences.edit();
                 spEditor.putLong(getString(R.string.ets_date), etsDate);
+                spEditor.putString(getString(R.string.branch_pref), branch);
 
                 spEditor.apply();
                 setViews();

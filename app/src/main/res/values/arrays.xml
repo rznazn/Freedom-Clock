@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="branches">
-        <item>Army</item>
-        <item>Marines</item>
-        <item>Navy</item>
-        <item>Air Force</item>
+        <item>@string/Army</item>
+        <item>@string/Marines</item>
+        <item>@string/Navy</item>
+        <item>@string/Air_Force</item>
     </array>
 </resources>

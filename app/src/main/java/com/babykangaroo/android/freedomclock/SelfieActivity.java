@@ -32,7 +32,7 @@ public class SelfieActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.MarineTheme);
+        setBranchTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selfie);
 
@@ -102,5 +102,25 @@ public class SelfieActivity extends AppCompatActivity {
         Canvas canvas = new Canvas(map);
         layout.draw(canvas);
         return map;
+    }
+    void setBranchTheme(){
+        String branch = PreferenceManager.getDefaultSharedPreferences(this).getString(getString(R.string.branch_pref), getString(R.string.Army));
+        switch (branch){
+            case "Army":
+                setTheme(R.style.ArmyTheme);
+                break;
+            case "Marines":
+                setTheme(R.style.MarineTheme);
+                break;
+            case "Navy":
+                setTheme(R.style.NavyTheme);
+                break;
+            case "Air Force":
+                setTheme(R.style.AirForceTheme);
+                break;
+            default:
+                setTheme(R.style.ArmyTheme);
+                break;
+        }
     }
 }

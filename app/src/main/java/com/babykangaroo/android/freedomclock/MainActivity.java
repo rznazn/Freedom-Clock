@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.support.v4.app.ActivityCompat;
@@ -23,7 +24,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.text.SimpleDateFormat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
     private FragmentManager fragmentManager;
     public Context mainContext;
@@ -36,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AirForceTheme);
+        mainContext = this;
+        mainSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mainSharedPreferences.registerOnSharedPreferenceChangeListener(this);
+
+        setBranchTheme();
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -46,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        mainContext = this;
-        mainSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
@@ -80,5 +83,33 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         dispatcher.mustSchedule(notification);
 
+    }
+
+    void setBranchTheme(){
+        String branch = mainSharedPreferences.getString(getString(R.string.branch_pref), getString(R.string.Army));
+        switch (branch){
+            case "Army":
+                setTheme(R.style.ArmyTheme);
+                break;
+            case "Marines":
+                setTheme(R.style.MarineTheme);
+                break;
+            case "Navy":
+                setTheme(R.style.NavyTheme);
+                break;
+            case "Air Force":
+                setTheme(R.style.AirForceTheme);
+                break;
+            default:
+                setTheme(R.style.ArmyTheme);
+                break;
+        }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        if (s == getString(R.string.branch_pref)) {
+            this.recreate();
+        }
     }
 }

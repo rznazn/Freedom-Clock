@@ -21,6 +21,12 @@
     <string name="delete">delete</string>
     <string name="bad_entry">invalid entry</string>
 
+    <string name="Army" translatable="false">Army</string>
+    <string name="Marines" translatable="false">Marines</string>
+    <string name="Navy" translatable="false">Navy</string>
+    <string name="Air_Force" translatable="false">Air Force</string>
+
 
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="branch_pref">branchPref</string>
 </resources>
