@@ -16,7 +16,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +30,6 @@ import android.widget.Toast;
 import com.babykangaroo.android.mydatabaselibrary.ListContract;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import java.text.SimpleDateFormat;
 
 /**
  * This fragment manages the lists of upcoming deadlines
@@ -130,6 +128,7 @@ public class DeadlineFragment extends Fragment implements LoaderManager.LoaderCa
         cursor.moveToFirst();
         showDeadlineDialog(cursor.getString(cursor.getColumnIndex(ListContract.ListContractEntry.COLUMN_ITEM_NAME)),
                 cursor.getInt(cursor.getColumnIndex(ListContract.ListContractEntry.COLUMN_ITEM_DATE)), clickedItemId);
+        cursor.close();
     }
 
     /**

@@ -4,14 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:camerakit="http://schemas.android.com/apk/res-auto"
     tools:context="com.babykangaroo.android.freedomclock.SelfieActivity">
 
-
-    <FrameLayout
-        android:id="@+id/fl_to_draw_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <FrameLayout
             android:id="@+id/fl_to_draw_actual"
             android:layout_width="match_parent"
@@ -20,7 +14,8 @@
         android:id="@+id/iv_selfie_container"
         android:scaleType="fitCenter"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:contentDescription="@string/selfie_cd"/>
 
         <TextView
             android:id="@+id/tv_time_left"
@@ -34,6 +29,7 @@
             android:layout_height="56dp"
             android:layout_margin="12dp"
             android:src="?attr/share"
+            android:contentDescription="@string/selfie_share_cd"
             android:layout_gravity="bottom|end"/>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_photo"
@@ -41,8 +37,8 @@
             android:layout_height="56dp"
             android:layout_margin="12dp"
             android:src="?attr/camera"
+            android:contentDescription="@string/selfi_camera_cd"
             android:layout_gravity="start|bottom"/>
-    </FrameLayout>
 
 
 </FrameLayout>

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
 import android.text.format.DateUtils;
-import android.widget.ImageView;
 import android.widget.RemoteViews;
 
 /**
@@ -20,7 +19,6 @@ public class EtsWidget extends AppWidgetProvider{
     /**
      * context variables
      */
-    public static Context mContext;
     public static AppWidgetManager mAppWidgetManager;
     public static int mAppWidgetId;
 
@@ -28,7 +26,6 @@ public class EtsWidget extends AppWidgetProvider{
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        mContext = context;
         mAppWidgetManager = appWidgetManager;
         mAppWidgetId = appWidgetIds[0];
         for (int appWidgetId : appWidgetIds) {
@@ -39,7 +36,7 @@ public class EtsWidget extends AppWidgetProvider{
     private static void updateEtsWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         long etsDate = sharedPreferences.getLong(context.getString(R.string.ets_date), 0);
-        String branch = sharedPreferences.getString(mContext.getString(R.string.branch_pref), mContext.getString(R.string.Army));
+        String branch = sharedPreferences.getString(context.getString(R.string.branch_pref), context.getString(R.string.Army));
         long daysLeft = ((etsDate-System.currentTimeMillis())/ DateUtils.DAY_IN_MILLIS) +1;
 
         mViews = new RemoteViews(context.getPackageName(), R.layout.ets_widget);

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fl_ets_widget"
-     android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
@@ -16,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:contentDescription="@string/branch_insignia_cd"
         android:alpha=".35"
         android:src="@drawable/u_s__department_of_the_army_da_seal1_5" />
     <LinearLayout
@@ -28,7 +30,7 @@
             style="@style/ContentTextViewEts"
             android:layout_width="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="0:0:0:0" />
+            tools:text="0:0:0:0" />
         <TextView
             style="@style/HeaderTextView"
             android:layout_margin="12dp"

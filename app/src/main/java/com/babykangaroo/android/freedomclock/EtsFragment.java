@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -185,7 +186,7 @@ public class EtsFragment extends Fragment {
             countDownTimer = null;
         }
         etsDate = sharedPreferences.getLong(getString(R.string.ets_date), 0);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd");
+        DateFormat dateFormat = DateFormat.getDateInstance();
         String dateToDisplay = dateFormat.format(etsDate);
         tvEtsDateView.setText(dateToDisplay);
         tvEtsDateView.setTextSize(40);

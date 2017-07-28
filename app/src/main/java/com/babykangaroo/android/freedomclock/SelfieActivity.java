@@ -24,7 +24,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
  */
 public class SelfieActivity extends AppCompatActivity {
 
-    private FrameLayout imageContainer;
     private FrameLayout toDraw;
     private TextView timeLeft;
     private long daysLeft;
@@ -65,7 +64,6 @@ public class SelfieActivity extends AppCompatActivity {
                 sharePhoto();
             }
         });
-        imageContainer = (FrameLayout) findViewById(R.id.fl_to_draw_container);
         toDraw = (FrameLayout) findViewById(R.id.fl_to_draw_actual);
 
         takePicture = (FloatingActionButton) findViewById(R.id.fab_photo);

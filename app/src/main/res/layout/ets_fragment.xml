@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:alpha=".35"
+        android:contentDescription="@string/branch_insignia_cd"
         android:src="?attr/insignia" />
 <ScrollView
     android:layout_width="match_parent"
@@ -50,7 +51,7 @@
         <TextView
             android:id="@+id/tv_time_until"
             style="@style/ContentTextViewEts"
-            android:text="0:0:0:0" />
+            tools:text="0:0:0:0" />
     </LinearLayout>
 </ScrollView>
 </FrameLayout>
@@ -58,11 +59,13 @@
         android:id="@+id/iv_set_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/set_prefs_cd"
         android:src="?attr/settings"/>
     <ImageView
         android:id="@+id/iv_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/share_cd"
         android:layout_gravity="end|top"
         android:src="?attr/share"/>
     <ImageView
@@ -70,5 +73,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
+        android:contentDescription="@string/photos_cd"
         android:src="?attr/camera"/>
 </FrameLayout>

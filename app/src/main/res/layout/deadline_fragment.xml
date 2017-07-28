@@ -9,7 +9,7 @@
 
     <TextView
         style="@style/HeaderTextView"
-        android:text="upcoming"/>
+        android:text="@string/upcoming"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import com.babykangaroo.android.mydatabaselibrary.ListContract;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
+import static java.text.DateFormat.getDateInstance;
 
 /**
  * Created by Gene Denney on 7/22/2017.
@@ -55,8 +58,8 @@ public class MyCursorAdapter extends RecyclerView.Adapter<MyCursorAdapter.Deadli
             holder.nameView.setText(event);
             long daysPrior = mCursor.getLong(mCursor.getColumnIndex(ListContract.ListContractEntry.COLUMN_ITEM_DATE));
             long dateOfevent = etsDate - ((1000 * 60 * 60 * 24) * daysPrior);
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MMM-dd");
-            String date = simpleDateFormat.format(dateOfevent);
+            DateFormat dateFormat = getDateInstance();
+            String date = dateFormat.format(dateOfevent);
             holder.dateView.setText(date);
     }
 
