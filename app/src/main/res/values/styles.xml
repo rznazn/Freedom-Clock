@@ -50,7 +50,7 @@
         <item name="colorPrimary">#424242</item>
         <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">#FFEA00</item>
-        <item name="insignia">@drawable/u_s__department_of_the_army_da_seal1_5</item>
+        <item name="insignia">@drawable/insignia_pending</item>
         <item name="add">@drawable/ic_add_blk</item>
         <item name="share">@drawable/ic_share_black_24dp</item>
         <item name="settings">@drawable/ic_settings_black_24dp</item>
@@ -62,7 +62,7 @@
         <item name="colorPrimary">#F44336</item>
         <item name="colorPrimaryDark">#B71C1C</item>
         <item name="colorAccent">#304FFE</item>
-        <item name="insignia">@drawable/emblem_marines</item>
+        <item name="insignia">@drawable/insignia_pending</item>
         <item name="add">@drawable/ic_add_blk</item>
         <item name="share">@drawable/ic_share_black_24dp</item>
         <item name="settings">@drawable/ic_settings_black_24dp</item>
@@ -74,7 +74,7 @@
         <item name="colorPrimary">#2196F3</item>
         <item name="colorPrimaryDark">#1565C0</item>
         <item name="colorAccent">#FFEA00</item>
-        <item name="insignia">@drawable/navyemblem</item>
+        <item name="insignia">@drawable/insignia_pending</item>
         <item name="add">@drawable/ic_add_blk</item>
         <item name="share">@drawable/ic_share_black_24dp</item>
         <item name="settings">@drawable/ic_settings_black_24dp</item>
@@ -86,7 +86,7 @@
         <item name="colorPrimary">#0288D1</item>
         <item name="colorPrimaryDark">#01579B</item>
         <item name="colorAccent">#BDBDBD</item>
-        <item name="insignia">@drawable/department_of_the_air_force_57f5d_250x250</item>
+        <item name="insignia">@drawable/insignia_pending</item>
         <item name="add">@drawable/ic_add_blk</item>
         <item name="share">@drawable/ic_share_black_24dp</item>
         <item name="settings">@drawable/ic_settings_black_24dp</item>

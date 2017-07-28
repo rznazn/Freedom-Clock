@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public static SharedPreferences mainSharedPreferences;
     public static FirebaseAnalytics mFirebaseAnalytics;
 
-    private AdView mAdView;
+//    private AdView mAdView;
 
 
     @Override
@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         setContentView(R.layout.activity_main);
 
 
-        mAdView = (AdView) findViewById(R.id.av_ads);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+//        mAdView = (AdView) findViewById(R.id.av_ads);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
 
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);

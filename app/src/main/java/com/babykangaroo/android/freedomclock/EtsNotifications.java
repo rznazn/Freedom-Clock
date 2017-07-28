@@ -42,19 +42,19 @@ public class EtsNotifications extends com.firebase.jobdispatcher.JobService {
         String branch = PreferenceManager.getDefaultSharedPreferences(this).getString(getString(R.string.branch_pref), getString(R.string.Army));
         switch (branch){
             case "Army":
-                inginiaId = context.getResources().getIdentifier("u_s__department_of_the_army_da_seal1_5", "drawable", context.getPackageName());
+                inginiaId = context.getResources().getIdentifier("insignia_pending", "drawable", context.getPackageName());
                 break;
             case "Marines":
-                inginiaId = context.getResources().getIdentifier("emblem_marines", "drawable", context.getPackageName());
+                inginiaId = context.getResources().getIdentifier("insignia_pending", "drawable", context.getPackageName());
                 break;
             case "Navy":
-                inginiaId = context.getResources().getIdentifier("navyemblem", "drawable", context.getPackageName());
+                inginiaId = context.getResources().getIdentifier("insignia_pending", "drawable", context.getPackageName());
                 break;
             case "Air Force":
-                inginiaId = context.getResources().getIdentifier("department_of_the_air_force_57f5d_250x250", "drawable", context.getPackageName());
+                inginiaId = context.getResources().getIdentifier("insignia_pending", "drawable", context.getPackageName());
                 break;
             default:
-                inginiaId = context.getResources().getIdentifier("u_s__department_of_the_army_da_seal1_5", "drawable", context.getPackageName());
+                inginiaId = context.getResources().getIdentifier("insignia_pending", "drawable", context.getPackageName());
                 break;
         }
 

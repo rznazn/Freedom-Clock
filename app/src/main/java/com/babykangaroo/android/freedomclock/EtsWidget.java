@@ -43,19 +43,19 @@ public class EtsWidget extends AppWidgetProvider{
 
         switch (branch){
             case "Army":
-                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.u_s__department_of_the_army_da_seal1_5);
+                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.insignia_pending);
                 break;
             case "Marines":
-                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.emblem_marines);
+                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.insignia_pending);
                 break;
             case "Navy":
-                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.navyemblem);
+                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.insignia_pending);
                 break;
             case "Air Force":
-                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.department_of_the_air_force_57f5d_250x250);
+                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.insignia_pending);
                 break;
             default:
-                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.u_s__department_of_the_army_da_seal1_5);
+                mViews.setImageViewResource(R.id.iv_branch_insignia, R.drawable.insignia_pending);
                 break;
         }
 
