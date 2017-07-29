@@ -15,12 +15,15 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -52,6 +55,9 @@ public class EtsFragment extends Fragment {
     private ImageView setETSdate;
     private ImageView shareEts;
     private ImageView takeSelfie;
+    private ImageView helpDialog;
+
+    private float dpHeight;
 
     @Nullable
     @Override
@@ -59,6 +65,9 @@ public class EtsFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.ets_fragment, container, false);
         parentContext = getActivity();
         sharedPreferences = MainActivity.mainSharedPreferences;
+
+        DisplayMetrics displayMetrics = parentContext.getResources().getDisplayMetrics();
+        dpHeight = displayMetrics.heightPixels / displayMetrics.density;
 
         toDraw = (FrameLayout) rootView.findViewById(R.id.fl_to_draw_actual);
         tvEtsDateView = (TextView) rootView.findViewById(R.id.tv_date_of_separation);
@@ -100,6 +109,19 @@ public class EtsFragment extends Fragment {
                 startActivity(new Intent(parentContext, SelfieActivity.class));
             }
         });
+
+        helpDialog = (ImageView) rootView.findViewById(R.id.iv_help);
+        helpDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(parentContext);
+                builder.setMessage(R.string.help_message);
+                builder.setPositiveButton(getString(R.string.dismiss), null);
+
+                AlertDialog ad = builder.create();
+                ad.show();
+            }
+        });
         /**
          * if ets date pref is null (fresh install) show date picker
          */
@@ -117,7 +139,10 @@ public class EtsFragment extends Fragment {
      */
     private void showDatePickerAd() {
         final View adView = getActivity().getLayoutInflater().inflate(R.layout.date_picker, null);
+        ScrollView innerView = (ScrollView) adView.findViewById(R.id.ll_date_picker);
         final DatePicker datePicker = (DatePicker) adView.findViewById(R.id.dp_datePicker);
+        double datePickerHeight = dpHeight*(0.6);
+        innerView.getLayoutParams().height = (int) datePickerHeight;
         final Spinner branchPicker = (Spinner) adView.findViewById(R.id.sp_branch_selector);
         if (sharedPreferences.contains(getString(R.string.ets_date))){
             long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), 0);

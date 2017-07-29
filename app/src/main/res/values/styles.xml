@@ -44,6 +44,7 @@
     <attr name="share" format="reference"/>
     <attr name="settings" format="reference"/>
     <attr name="camera" format="reference"/>
+    <attr name="help" format="reference"/>
     <attr name="branchBackground" format="color"/>
 
     <style name="ArmyTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -55,6 +56,7 @@
         <item name="share">@drawable/ic_share_black_24dp</item>
         <item name="settings">@drawable/ic_settings_black_24dp</item>
         <item name="camera">@drawable/ic_camera_blk</item>
+        <item name="help">@drawable/ic_help</item>
         <item name="branchBackground">#A5D6A7</item>
     </style>
 
@@ -67,6 +69,7 @@
         <item name="share">@drawable/ic_share_black_24dp</item>
         <item name="settings">@drawable/ic_settings_black_24dp</item>
         <item name="camera">@drawable/ic_camera_blk</item>
+        <item name="help">@drawable/ic_help</item>
         <item name="branchBackground">#BCAAA4</item>
     </style>
 
@@ -79,6 +82,7 @@
         <item name="share">@drawable/ic_share_black_24dp</item>
         <item name="settings">@drawable/ic_settings_black_24dp</item>
         <item name="camera">@drawable/ic_camera_blk</item>
+        <item name="help">@drawable/ic_help</item>
         <item name="branchBackground">#81D4FA</item>
     </style>
 
@@ -91,6 +95,7 @@
         <item name="share">@drawable/ic_share_black_24dp</item>
         <item name="settings">@drawable/ic_settings_black_24dp</item>
         <item name="camera">@drawable/ic_camera_blk</item>
+        <item name="help">@drawable/ic_help</item>
         <item name="branchBackground">#84FFFF</item>
     </style>
 

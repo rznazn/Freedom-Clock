@@ -9,7 +9,6 @@
     <string name="year_pref">yearPref</string>
     <string name="month_pref">monthPref</string>
     <string name="day_pref">dayPref</string>
-    <string name="ets_date">etsDate</string>
     <string name="set_ets">Click the settings gear to set date of separation</string>
     <string name="cancel">Cancel</string>
     <string name="click_fab">Click the action button below to enter a deadline in days prior to separation</string>
@@ -22,21 +21,31 @@
     <string name="bad_entry">invalid entry</string>
 
     <!-- strings for branch prefs-->
+    <string name="ets_date" translatable="false">etsDate</string>
+    <string name="branch_pref" translatable="false">branchPref</string>
     <string name="Army" translatable="false">Army</string>
     <string name="Marines" translatable="false">Marines</string>
     <string name="Navy" translatable="false">Navy</string>
     <string name="Air_Force" translatable="false">Air Force</string>
 
 
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="branch_pref">branchPref</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+
     <string name="notification_text">days until FREEDOM!!!</string>
     <string name="upcoming">upcoming</string>
-    <string name="selfie_cd">this view will hold a picture taken and superimpose text dispalying time left in service</string>
+    <string name="selfie_cd">this view will hold a picture taken and superimpose text displaying time left in service</string>
     <string name="selfi_camera_cd">This button opens your camera.</string>
     <string name="selfie_share_cd">This button will share your selfie with superimposed text</string>
     <string name="branch_insignia_cd">service branch insignia</string>
     <string name="set_prefs_cd">select this to set your separation date and branch of service</string>
     <string name="share_cd">select to share a snapshot of your countdown</string>
     <string name="photos_cd">select to start taking pre ets selfies</string>
+    <string name="help_message"> Thank you for giving Freedom Clock try. If you have any suggestions please go to the play store listing for Freedom Clock and select \"email
+    the developer\" at the bottom.\n\n   If you haven\'t already, you can click the settings gear to set your ETS/EAS date and branch of service. Freedom Clock
+        counts to the day after your ETS/EAS, when you actually become a civilian.\n
+       Click the share icon to post a snapshot of your countdown.\n   Click the camera icon to take a photo stamped with your remaining days in service.\n
+    Use the \"upcoming\" feature to enter deadlines given to you in \"days prior to separation\" and get the date back, then select the entry to "schedule" it in your calendar.\n
+           Lastly, don\'t forget to set your home screen widget to show your remaining days at a glance.\n\n
+    Thanks for your service and good luck in your future endeavours.</string>
+    <string name="dismiss">dismiss</string>
 </resources>

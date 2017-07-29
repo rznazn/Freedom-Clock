@@ -40,7 +40,7 @@
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize"/>
 
-        <activity android:name="com.google.android.gms.ads.AdActivity"/>
+        <!--<activity android:name="com.google.android.gms.ads.AdActivity"/>-->
 
         <meta-data android:name="com.google.android.gms.version"/>
     </application>
