@@ -114,8 +114,15 @@ public class EtsFragment extends Fragment {
         helpDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final View adView = (View) getActivity().getLayoutInflater().inflate(R.layout.help_dialog, null);
+                ScrollView innerView = (ScrollView) adView.findViewById(R.id.ll_help_container);
+                double messageHeight = dpHeight*(0.6);
+                innerView.getLayoutParams().height = (int) messageHeight;
+                final TextView messageTv =(TextView) adView.findViewById(R.id.tv_help_message);
+                messageTv.setText(R.string.help_message);
                 AlertDialog.Builder builder = new AlertDialog.Builder(parentContext);
-                builder.setMessage(R.string.help_message);
+                builder.setView(adView);
+                builder.setMessage(R.string.from_the_developer);
                 builder.setPositiveButton(getString(R.string.dismiss), null);
 
                 AlertDialog ad = builder.create();
