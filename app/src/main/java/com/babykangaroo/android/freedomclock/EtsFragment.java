@@ -16,6 +16,7 @@ import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,6 @@ public class EtsFragment extends Fragment {
     private ImageView takeSelfie;
     private ImageView helpDialog;
 
-    private float dpHeight;
 
     @Nullable
     @Override
@@ -66,8 +66,7 @@ public class EtsFragment extends Fragment {
         parentContext = getActivity();
         sharedPreferences = MainActivity.mainSharedPreferences;
 
-        DisplayMetrics displayMetrics = parentContext.getResources().getDisplayMetrics();
-        dpHeight = displayMetrics.heightPixels / displayMetrics.density;
+
 
         toDraw = (FrameLayout) rootView.findViewById(R.id.fl_to_draw_actual);
         tvEtsDateView = (TextView) rootView.findViewById(R.id.tv_date_of_separation);
@@ -114,10 +113,11 @@ public class EtsFragment extends Fragment {
         helpDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final View adView = (View) getActivity().getLayoutInflater().inflate(R.layout.help_dialog, null);
+                final View adView = getActivity().getLayoutInflater().inflate(R.layout.help_dialog, null);
                 ScrollView innerView = (ScrollView) adView.findViewById(R.id.ll_help_container);
-                double messageHeight = dpHeight*(0.6);
-                innerView.getLayoutParams().height = (int) messageHeight;
+//                if (MainActivity.dpHeight < 900) {
+//                    innerView.getLayoutParams().height = (int) MainActivity.dpHeight;
+//                }
                 final TextView messageTv =(TextView) adView.findViewById(R.id.tv_help_message);
                 messageTv.setText(R.string.help_message);
                 AlertDialog.Builder builder = new AlertDialog.Builder(parentContext);
@@ -148,8 +148,9 @@ public class EtsFragment extends Fragment {
         final View adView = getActivity().getLayoutInflater().inflate(R.layout.date_picker, null);
         ScrollView innerView = (ScrollView) adView.findViewById(R.id.ll_date_picker);
         final DatePicker datePicker = (DatePicker) adView.findViewById(R.id.dp_datePicker);
-        double datePickerHeight = dpHeight*(0.6);
-        innerView.getLayoutParams().height = (int) datePickerHeight;
+//        if (MainActivity.dpHeight <=800) {
+//            innerView.getLayoutParams().height = (int) MainActivity.dpHeight*2;
+//        }
         final Spinner branchPicker = (Spinner) adView.findViewById(R.id.sp_branch_selector);
         if (sharedPreferences.contains(getString(R.string.ets_date))){
             long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), 0);
