@@ -115,9 +115,8 @@ public class EtsFragment extends Fragment {
             public void onClick(View view) {
                 final View adView = getActivity().getLayoutInflater().inflate(R.layout.help_dialog, null);
                 ScrollView innerView = (ScrollView) adView.findViewById(R.id.ll_help_container);
-//                if (MainActivity.dpHeight < 900) {
-//                    innerView.getLayoutParams().height = (int) MainActivity.dpHeight;
-//                }
+                    innerView.getLayoutParams().height = MainActivity.dpHeight/2;
+
                 final TextView messageTv =(TextView) adView.findViewById(R.id.tv_help_message);
                 messageTv.setText(R.string.help_message);
                 AlertDialog.Builder builder = new AlertDialog.Builder(parentContext);
@@ -148,9 +147,8 @@ public class EtsFragment extends Fragment {
         final View adView = getActivity().getLayoutInflater().inflate(R.layout.date_picker, null);
         ScrollView innerView = (ScrollView) adView.findViewById(R.id.ll_date_picker);
         final DatePicker datePicker = (DatePicker) adView.findViewById(R.id.dp_datePicker);
-//        if (MainActivity.dpHeight <=800) {
-//            innerView.getLayoutParams().height = (int) MainActivity.dpHeight*2;
-//        }
+            innerView.getLayoutParams().height = MainActivity.dpHeight/2;
+
         final Spinner branchPicker = (Spinner) adView.findViewById(R.id.sp_branch_selector);
         if (sharedPreferences.contains(getString(R.string.ets_date))){
             long etsDate = sharedPreferences.getLong(getString(R.string.ets_date), 0);

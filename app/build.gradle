@@ -17,8 +17,8 @@ android {
         applicationId "com.babykangaroo.android.freedomclock"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 3
-        versionName "1.01.01"
+        versionCode 4
+        versionName "1.01.02"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

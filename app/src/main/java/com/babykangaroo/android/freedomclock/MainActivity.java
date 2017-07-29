@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Point;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.text.format.DateUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public static SharedPreferences mainSharedPreferences;
     public static FirebaseAnalytics mFirebaseAnalytics;
 
-    public static float dpHeight;
+    public static int dpHeight;
 //    private AdView mAdView;
 
 
@@ -48,9 +50,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         mainSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mainSharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
-        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-        dpHeight = displayMetrics.heightPixels / displayMetrics.density;
-        Log.v("ETS FRAGMENT", String.valueOf(dpHeight));
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        dpHeight = size.y;
         setBranchTheme();
         super.onCreate(savedInstanceState);
 

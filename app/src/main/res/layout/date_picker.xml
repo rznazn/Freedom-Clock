@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
     <ScrollView
         android:id="@+id/ll_date_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <Spinner
-        android:id="@+id/sp_branch_selector"
-        android:layout_width="match_parent"
-        android:background="?attr/branchBackground"
-        android:layout_height="60dp"
-        android:entries="@array/branches" />
-    <DatePicker
-        android:id="@+id/dp_datePicker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/sp_branch_selector"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="?attr/branchBackground"
+                android:entries="@array/branches" />
+
+            <DatePicker
+                android:id="@+id/dp_datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
