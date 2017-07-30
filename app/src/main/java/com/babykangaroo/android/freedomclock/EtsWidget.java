@@ -6,8 +6,10 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.transition.Visibility;
 import android.support.v7.preference.PreferenceManager;
 import android.text.format.DateUtils;
+import android.view.View;
 import android.widget.RemoteViews;
 
 /**
@@ -40,6 +42,13 @@ public class EtsWidget extends AppWidgetProvider{
         long daysLeft = ((etsDate-System.currentTimeMillis())/ DateUtils.DAY_IN_MILLIS) +1;
 
         mViews = new RemoteViews(context.getPackageName(), R.layout.ets_widget);
+
+        if (daysLeft == 1){
+            mViews.setTextViewText(R.id.tv_days_until, context.getString(R.string.day_until_freedom_widget));
+        }else if (daysLeft <= 0){
+            mViews.setTextViewText(R.id.tv_days_until, context.getString(R.string.done_son));
+            mViews.setViewVisibility(R.id.tv_time_until, View.GONE);
+        }
 
         switch (branch){
             case "Army":

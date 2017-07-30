@@ -16,6 +16,9 @@
     <string name="deadline_days_prior">Enter number of days prior to separation</string>
     <string name="take_selfie">SMILE</string>
     <string name="days_until_freedom">DAYS UNTIL FREEDOM</string>
+    <string name="no_selfie">You need to take a picture first.</string>
+    <string name="day_until_freedom">DAY UNTIL FREEDOM!!!</string>
+    <string name="done_son">I\'M DONE, SON!!! DUECES!!!</string>
     <string name="schedule">schedule</string>
     <string name="delete">delete</string>
     <string name="bad_entry">invalid entry</string>
@@ -49,4 +52,5 @@
     Thanks for your service and good luck in your future endeavours.</string>
     <string name="dismiss">dismiss</string>
     <string name="from_the_developer">From the developer:</string>
+    <string name="day_until_freedom_widget">DAY UNTIL FREEDOM</string>
 </resources>

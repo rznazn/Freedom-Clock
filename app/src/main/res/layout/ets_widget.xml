@@ -20,6 +20,7 @@
         android:contentDescription="@string/branch_insignia_cd"
         android:alpha=".35"
         android:src="@drawable/u_s__department_of_the_army_da_seal1_5" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,10 +32,12 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center_vertical"
             tools:text="0:0:0:0" />
+
         <TextView
+            android:id="@+id/tv_days_until"
             style="@style/HeaderTextView"
-            android:layout_margin="12dp"
             android:layout_gravity="center_vertical"
+            android:layout_margin="12dp"
             android:text="@string/days_until_freedom" />
     </LinearLayout>
 

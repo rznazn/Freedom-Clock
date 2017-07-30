@@ -1,6 +1,7 @@
 package com.babykangaroo.android.freedomclock;
 
 import android.*;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -23,6 +25,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
  * activity for taking and sharing selfies with time left overlay
  */
 public class SelfieActivity extends AppCompatActivity {
+
+    private Context mContext;
 
     private FrameLayout toDraw;
     private TextView timeLeft;
@@ -36,6 +40,7 @@ public class SelfieActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mContext = this;
         setBranchTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selfie);
@@ -51,7 +56,13 @@ public class SelfieActivity extends AppCompatActivity {
         long now = System.currentTimeMillis();
         long millisLeft = etsDate - now;
         daysLeft = (millisLeft/ DateUtils.DAY_IN_MILLIS) + 1;
-        message = String.valueOf(daysLeft) + " " + getString(R.string.days_until_freedom);
+        if (daysLeft > 1) {
+            message = String.valueOf(daysLeft) + " " + getString(R.string.days_until_freedom);
+        }else if (daysLeft == 1){
+            message= String.valueOf(daysLeft) + " " + getString(R.string.day_until_freedom);
+        }else if (daysLeft <= 0){
+            message = getString(R.string.done_son);
+        }
 
         selfieContainer = (ImageView) findViewById(R.id.iv_selfie_container);
         timeLeft = (TextView) findViewById(R.id.tv_time_left);
@@ -61,7 +72,11 @@ public class SelfieActivity extends AppCompatActivity {
         shareFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sharePhoto();
+                if (selfieContainer.getDrawable() == null){
+                    Toast.makeText(mContext, getString(R.string.no_selfie), Toast.LENGTH_LONG).show();
+                } else {
+                    sharePhoto();
+                }
             }
         });
         toDraw = (FrameLayout) findViewById(R.id.fl_to_draw_actual);

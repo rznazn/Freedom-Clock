@@ -66,8 +66,6 @@ public class EtsFragment extends Fragment {
         parentContext = getActivity();
         sharedPreferences = MainActivity.mainSharedPreferences;
 
-
-
         toDraw = (FrameLayout) rootView.findViewById(R.id.fl_to_draw_actual);
         tvEtsDateView = (TextView) rootView.findViewById(R.id.tv_date_of_separation);
         tvDaysTillSeperation = (TextView) rootView.findViewById(R.id.tv_time_until);
